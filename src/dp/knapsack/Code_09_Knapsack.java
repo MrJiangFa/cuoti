@@ -1,4 +1,4 @@
-package dp;
+package dp.knapsack;
 
 public class Code_09_Knapsack {
 
