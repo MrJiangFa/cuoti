@@ -44,7 +44,6 @@ public class Code_09_Knapsack {
             }
         }
         return dp[weights.length][bag];
-
     }
 
 
@@ -68,7 +67,6 @@ public class Code_09_Knapsack {
         System.out.println(processByDP(c, p, bag));
         System.out.println(maxValue2(c, p, bag));
         System.out.println(maxValue(c, p, bag));
-
     }
 
 }
