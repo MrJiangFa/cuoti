@@ -57,7 +57,7 @@ public class Code_04_Print_All_Permutations {
 
     /**
      * 采用迭代法或递推法，首先向结果的list中加入一个list，然后取出该list，
-     * 向list中的0-list.size()位置插入数组中的某一个元素
+     * 向list中的0-linked_list.size()位置插入数组中的某一个元素
      *
      * @param nums
      * @return

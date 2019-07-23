@@ -2,6 +2,9 @@ package stack.monotonicstack;
 
 import java.util.Stack;
 
+/**
+ * 单调栈的应用
+ */
 public class MaximalRectangle {
 
     public static void main(String[] args) {

@@ -20,7 +20,7 @@ public class Test {
             int j = 0;
             for (; j < n; j++) {
                 if (j == 0) {
-//                    System.out.println(Math.abs(list.get(i).get(j)-list.get(i).get(n-1))>m);
+//                    System.out.println(Math.abs(linked_list.get(i).get(j)-linked_list.get(i).get(n-1))>m);
                     if (Math.abs(list.get(i).get(j) - list.get(i).get(n - 1)) > m ||
                             Math.abs(list.get(i).get(j) - list.get(i).get(j + 1)) > m) {
                         break;

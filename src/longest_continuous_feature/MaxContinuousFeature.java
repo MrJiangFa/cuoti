@@ -3,6 +3,9 @@ package longest_continuous_feature;
 import java.util.HashSet;
 import java.util.Scanner;
 
+/**
+ * 猫咪的最长连续特征
+ */
 public class MaxContinuousFeature {
     /**
      * 1

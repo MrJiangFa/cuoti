@@ -1,17 +1,12 @@
 package design_parttern;
 
 /**
-<<<<<<< HEAD
  * 适配器是作为两个不兼容的接口之间的桥梁，结合了两个独立接口的功能
  * 应用场景：将现存的对象放到新的环境中，而新环境要求的接口先对象无法满足；
  *
  *
  */
-public class AdapterPattern {
-=======
- * 优点：让两个没有任何关联的类一起运行；提高类的复用；
- * 应用场景：有动机的修改一个正常运行的系统接口
- */
+
 public class AdapterPattern {
     interface MediaPlayer {
         void play(String audioType, String filename);
@@ -54,7 +49,4 @@ public class AdapterPattern {
             }
         }
     }
-
->>>>>>> 40ef39e271317874e3d364ab18df604999d9f2b1
-
 }

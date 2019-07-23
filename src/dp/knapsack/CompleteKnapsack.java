@@ -1,5 +1,8 @@
 package dp.knapsack;
 
+/**
+ * leetcode322:硬币问题
+ */
 public class CompleteKnapsack {
     public static void main(String[] args) {
         System.out.println(process(new int[]{1, 2, 4}, 5, 0));
