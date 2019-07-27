@@ -75,7 +75,7 @@ public class Code_07_IsBSTAndCBT {
 		return true;
 	}
 
-	// for test -- print tree
+	// for test -- print binarytree
 	public static void printTree(Node head) {
 		System.out.println("Binary Tree:");
 		printInOrder(head, 0, "H", 17);

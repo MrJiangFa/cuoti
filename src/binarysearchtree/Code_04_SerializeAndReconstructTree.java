@@ -100,7 +100,7 @@ public class Code_04_SerializeAndReconstructTree {
 		return new Node(Integer.valueOf(val));
 	}
 
-	// for test -- print tree
+	// for test -- print binarytree
 	public static void printTree(Node head) {
 		System.out.println("Binary Tree:");
 		printInOrder(head, 0, "H", 17);
@@ -135,15 +135,15 @@ public class Code_04_SerializeAndReconstructTree {
 		printTree(head);
 
 		String pre = serialByPre(head);
-		System.out.println("serialize tree by pre-order: " + pre);
+		System.out.println("serialize binarytree by pre-order: " + pre);
 		head = reconByPreString(pre);
-		System.out.print("reconstruct tree by pre-order, ");
+		System.out.print("reconstruct binarytree by pre-order, ");
 		printTree(head);
 
 		String level = serialByLevel(head);
-		System.out.println("serialize tree by level: " + level);
+		System.out.println("serialize binarytree by level: " + level);
 		head = reconByLevelString(level);
-		System.out.print("reconstruct tree by level, ");
+		System.out.print("reconstruct binarytree by level, ");
 		printTree(head);
 
 		System.out.println("====================================");
@@ -152,15 +152,15 @@ public class Code_04_SerializeAndReconstructTree {
 		printTree(head);
 
 		pre = serialByPre(head);
-		System.out.println("serialize tree by pre-order: " + pre);
+		System.out.println("serialize binarytree by pre-order: " + pre);
 		head = reconByPreString(pre);
-		System.out.print("reconstruct tree by pre-order, ");
+		System.out.print("reconstruct binarytree by pre-order, ");
 		printTree(head);
 
 		level = serialByLevel(head);
-		System.out.println("serialize tree by level: " + level);
+		System.out.println("serialize binarytree by level: " + level);
 		head = reconByLevelString(level);
-		System.out.print("reconstruct tree by level, ");
+		System.out.print("reconstruct binarytree by level, ");
 		printTree(head);
 
 		System.out.println("====================================");
@@ -173,15 +173,15 @@ public class Code_04_SerializeAndReconstructTree {
 		printTree(head);
 
 		pre = serialByPre(head);
-		System.out.println("serialize tree by pre-order: " + pre);
+		System.out.println("serialize binarytree by pre-order: " + pre);
 		head = reconByPreString(pre);
-		System.out.print("reconstruct tree by pre-order, ");
+		System.out.print("reconstruct binarytree by pre-order, ");
 		printTree(head);
 
 		level = serialByLevel(head);
-		System.out.println("serialize tree by level: " + level);
+		System.out.println("serialize binarytree by level: " + level);
 		head = reconByLevelString(level);
-		System.out.print("reconstruct tree by level, ");
+		System.out.print("reconstruct binarytree by level, ");
 		printTree(head);
 
 		System.out.println("====================================");
@@ -195,15 +195,15 @@ public class Code_04_SerializeAndReconstructTree {
 		printTree(head);
 
 		pre = serialByPre(head);
-		System.out.println("serialize tree by pre-order: " + pre);
+		System.out.println("serialize binarytree by pre-order: " + pre);
 		head = reconByPreString(pre);
-		System.out.print("reconstruct tree by pre-order, ");
+		System.out.print("reconstruct binarytree by pre-order, ");
 		printTree(head);
 
 		level = serialByLevel(head);
-		System.out.println("serialize tree by level: " + level);
+		System.out.println("serialize binarytree by level: " + level);
 		head = reconByLevelString(level);
-		System.out.print("reconstruct tree by level, ");
+		System.out.print("reconstruct binarytree by level, ");
 		printTree(head);
 
 		System.out.println("====================================");
