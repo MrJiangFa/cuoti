@@ -77,7 +77,7 @@ public class SocketChannelTest {
             if (bytesRead == -1) {
                 clientChannel.close();
             } else {
-                buffer.flip();//将缓冲区准备为数据传出状态
+                buffer.flip();//将缓冲区准备为数据读取状态
 
             }
         }

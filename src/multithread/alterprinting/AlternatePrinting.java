@@ -1,8 +1,5 @@
 package multithread.alterprinting;
 
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.atomic.AtomicInteger;
-
 /**
  * 三个线程交替打印 ABCABC
  * 同步块，wait,notify控制三个线程的执行次序，控制程序ThreadA->ThreadB->ThreadC按顺序执行
@@ -11,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 参考：https://blog.csdn.net/xiaokang123456kao/article/details/77331878
  */
 public class AlternatePrinting {
-    public static class ThreadPrinter extends Thread {
+    static class ThreadPrinter extends Thread {
         String name;
         Object preLock;
         Object curLock;
@@ -34,7 +31,7 @@ public class AlternatePrinting {
                     }//至此执行完curLock的同步块，同时释放curLock锁
                     try {
                         if (count != 0) {
-                            preLock.wait();
+                            preLock.wait();//当前线程进入阻塞状态
                         }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -44,7 +41,7 @@ public class AlternatePrinting {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Object a = new Object();
         Object b = new Object();
         Object c = new Object();
@@ -52,12 +49,9 @@ public class AlternatePrinting {
         ThreadPrinter pb = new ThreadPrinter("B", a, b);
         ThreadPrinter pc = new ThreadPrinter("C", b, c);
         pa.start();
+        Thread.sleep(100);//需要确保线程"pa"先获得锁 c，a
         pb.start();
         pc.start();
-        Integer count = 0;
-        synchronized (count){
-
-        }
     }
 }
 

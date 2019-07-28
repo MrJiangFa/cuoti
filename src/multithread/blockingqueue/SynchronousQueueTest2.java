@@ -1,4 +1,4 @@
-package multithread.BlockingQueue;
+package multithread.blockingqueue;
 
 import java.util.concurrent.Semaphore;
 
