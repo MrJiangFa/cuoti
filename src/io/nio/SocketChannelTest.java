@@ -39,7 +39,6 @@ public class SocketChannelTest {
             serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);//只有非阻塞信道才可以注册监听器，并在注册过程中指出可以
 
         } catch (IOException e) {
-
         }
     }
 
