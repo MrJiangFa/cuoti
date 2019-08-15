@@ -36,30 +36,32 @@ public class MethodRef {
 
     }
 
-    static interface Operation {
+    interface Operation {
         int operation(int a, int b);
     }
 
     static class OperationFactory {
-        private static final Operation add = (a, b) -> a + b;
-        private static final Operation sub = (a, b) -> a - b;
-        private static final Operation multi = (a, b) -> a * b;
-        private static final Operation div = (a, b) -> a / b;
+        private static final Operation OR = (a, b) -> a ^ b;
+        private static final Operation ADD = (a, b) -> a + b;
+        private static final Operation SUB = (a, b) -> a - b;
+        private static final Operation MULTI = (a, b) -> a * b;
+        private static final Operation DIV = (a, b) -> a / b;
+
 
         public static Operation getSub() {
-            return sub;
+            return SUB;
         }
 
         public static Operation getMulti() {
-            return multi;
+            return MULTI;
         }
 
         public static Operation getDiv() {
-            return div;
+            return DIV;
         }
 
         public static Operation getAdd() {
-            return add;
+            return ADD;
         }
 
     }

@@ -13,16 +13,14 @@ public class CallBackImpl implements CallBack {
     //响应回调函数
     @Override
     public void solve() {
-
         System.out.println("the problem is solved");
     }
 
     public void registerCallback(){
         System.out.println("ask someone to solve the problem");
+        b.call(this);//将回调函数注册到调用方
         /**
-         * 自身去干其他事
-         * 其他业务流程
+         * 转头去干其他事
          */
-        this.b.call(this);
     }
 }
