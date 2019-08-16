@@ -3,14 +3,8 @@ import java.util.concurrent.FutureTask;
 
 public class Test {
     public static void main(String[] args) {
-        long startTime = System.currentTimeMillis();
-        FutureTask futureTask1 = new FutureTask(() -> {
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }, null);
+        int[][] arr = new int[][]{{1,2},{3,4}};
+        System.out.println(arr[0][1]);
 
     }
 }
