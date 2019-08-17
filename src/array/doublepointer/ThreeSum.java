@@ -26,6 +26,7 @@ public class ThreeSum {
         }
         return res;
     }
+
     public static void threeSum(int[] nums,int first,int target,int low,int high,List<List<Integer>> res3){
         int numsLen = nums.length;
         if(high-low<2||3*nums[0]>target||3*nums[numsLen-1]<target){

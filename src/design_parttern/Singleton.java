@@ -1,6 +1,9 @@
 package design_parttern;
 
 public class Singleton {
+    public static void main(String[] args) {
+
+    }
     /**
      * 懒汉式：用的时候再创建，线程不安全
      */
@@ -15,6 +18,7 @@ public class Singleton {
             return instance;
         }
     }
+
 
     /**
      * 采用synchronized关键字来保证线程安全性，排他锁影响效率；
