@@ -1,6 +1,7 @@
 package io;
 
 import java.io.*;
+import java.util.stream.Stream;
 
 public class BufferedInputStreamTest {
     public static void main(String[] args){

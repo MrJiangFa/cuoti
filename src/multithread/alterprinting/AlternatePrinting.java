@@ -1,5 +1,9 @@
 package multithread.alterprinting;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+
 /**
  * 三个线程交替打印 ABCABC
  * 同步块，wait,notify控制三个线程的执行次序，控制程序ThreadA->ThreadB->ThreadC按顺序执行

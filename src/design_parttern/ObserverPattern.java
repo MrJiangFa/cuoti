@@ -26,6 +26,7 @@ public class ObserverPattern {
             return state;
         }
 
+        //为属性改变设置统一set方法，只要进入set方法，就会唤醒对应的观察者
         public void setState(int state) {
             this.state = state;
             notifyAllServers();

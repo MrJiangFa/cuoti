@@ -9,6 +9,7 @@ import java.nio.channels.FileChannel;
 public class ChannelsTest {
     public static void main(String[] args) {
         try {
+
             RandomAccessFile accessFile = new RandomAccessFile("E:\\dd\\jar\\create.txt", "rw");
             FileChannel inChannel = accessFile.getChannel();
             ByteBuffer head = ByteBuffer.allocate(6);

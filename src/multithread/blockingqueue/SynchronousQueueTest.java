@@ -1,5 +1,8 @@
 package multithread.blockingqueue;
 
+import java.util.Arrays;
+import java.util.concurrent.BlockingQueue;
+
 public class SynchronousQueueTest<E> {
     //采用wait()配合notify()、notifyAll()的方式控制对于一个变量的访问，从而实现SynchronousQueue
 
