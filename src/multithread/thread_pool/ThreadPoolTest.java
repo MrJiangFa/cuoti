@@ -1,7 +1,5 @@
 package multithread.thread_pool;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
 import java.util.concurrent.*;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
