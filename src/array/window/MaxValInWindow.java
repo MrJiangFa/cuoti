@@ -2,6 +2,7 @@ package array.window;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * 给定一个数组，一个固定大小的滑动窗口从左向右滑动，求解一个每滑动一次，滑动窗口中的最大值

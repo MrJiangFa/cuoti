@@ -1,3 +1,4 @@
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.FutureTask;
@@ -22,7 +23,9 @@ public class Test {
 //        System.out.println(Runtime.getRuntime().availableProcessors());
 //        long userId = 56800004874L;
 //        System.out.println(String.valueOf(userId).hashCode());
-        System.out.println((char)3000);
+//        System.out.println((char)3000);
+        List<Integer> list = new ArrayList<>();
+        System.out.println(list.get(0));
     }
     private void test(int a){
 
