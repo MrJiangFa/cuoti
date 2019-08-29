@@ -15,10 +15,10 @@ public class MaxValInWindow {
     /**
      * @param arr：所给的数组
      * @param w：窗口的大小——窗口头为最大值，尾为最小值
-     * @return 返回一个arr.length-w+1长度的数组表示窗口在向右移动过程中的最大值
+     * @return 返回一个 arr.length-w+1 长度的数组表示窗口在向右移动过程中的最大值
      * 复杂度：数组中每个数组只会进队列一次，出队列一次
      */
-    protected static int[] getMaxWindow(int[] arr, int w) {
+    private static int[] getMaxWindow(int[] arr, int w) {
         if (arr == null || w < 1 || arr.length < w) {
             return null;
         }
