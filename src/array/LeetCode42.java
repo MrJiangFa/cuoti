@@ -1,25 +1,18 @@
 package array;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
+/**
+ * n个非负整数表示每个宽度为1的柱子的高度，计算按此排列的柱子下雨之后能接多少水；
+ */
 public class LeetCode42 {
     public static void main(String[] args) {
         System.out.println(trap(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
-        List<String> list = Arrays.asList("a","b");
-        List<String> filtered = list.stream().filter(s->!s.equals("b")).collect(Collectors.toList());
-        Predicate<Integer> p1 = i->i.equals(2);
-        Predicate<String> p2 = i->i.equals("a");
-        System.out.println(p1.test(2));
     }
 
     public static int trap(int[] height) {
         if (height == null || height.length < 3) {
             return 0;
         }
-        int max = findMax(height, 0, height.length - 1);
+        int max = findMax(height, 0, height.length - 1);//寻找最高的柱子
         int l = 0, r = height.length - 1;
         while (l < height.length) {
             if (height[l] == max) {
@@ -44,7 +37,6 @@ public class LeetCode42 {
             return midArea + getAreaOfR(height, r) + getAreaOfL(height, l);
         }
         return getAreaOfR(height, r) + getAreaOfL(height, l);
-
     }
 
     public static int getAreaOfR(int[] height, int index) {
@@ -100,4 +92,26 @@ public class LeetCode42 {
         }
         return res;
     }
+
+    private static int trap2(int[] arr) {
+        int len = arr.length;
+        int res = 0;
+        int left = 0, right = len - 1;
+        int maxLeft = 0, maxRight = 0;
+        while (left <= right) {
+            if (arr[left] <= arr[right]) {
+                if (arr[left] >= maxLeft)
+                    maxLeft = arr[left];
+                else
+                    res += maxLeft - arr[left];
+            } else {
+                if (arr[right] >= maxRight)
+                    maxRight = arr[right];
+                else
+                    res += maxRight - arr[right];
+            }
+        }
+        return res;
+    }
+
 }

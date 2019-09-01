@@ -24,8 +24,10 @@ public class Test {
 //        long userId = 56800004874L;
 //        System.out.println(String.valueOf(userId).hashCode());
 //        System.out.println((char)3000);
-        List<Integer> list = new ArrayList<>();
-        System.out.println(list.get(0));
+//        List<Integer> list = new ArrayList<>();
+//        System.out.println(list.get(0));
+        String s = "aa{{company}}";
+        System.out.println(s.contains("^\\{\\{.+\\}\\}$"));
     }
     private void test(int a){
 

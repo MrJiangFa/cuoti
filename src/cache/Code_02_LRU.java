@@ -9,7 +9,7 @@ public class Code_02_LRU {
 
     public static class Node<V> {
         public V value;
-        public Node<V> last;//表示上一个节点
+        public Node<V> before;//表示上一个节点
         public Node<V> next;//表示下一个节点
 
         public Node(V value) {
@@ -35,7 +35,7 @@ public class Code_02_LRU {
                 this.tail = newNode;
             } else {
                 this.tail.next = newNode;
-                newNode.last = this.tail;
+                newNode.before = this.tail;
                 this.tail = newNode;
             }
         }
@@ -46,12 +46,12 @@ public class Code_02_LRU {
             }
             if (this.head == node) {
                 this.head = node.next;
-                this.head.last = null;
+                this.head.before = null;
             } else {
-                node.last.next = node.next;
-                node.next.last = node.last;
+                node.before.next = node.next;
+                node.next.before = node.before;
             }
-            node.last = this.tail;
+            node.before = this.tail;
             node.next = null;
             this.tail.next = node;
             this.tail = node;
@@ -68,7 +68,7 @@ public class Code_02_LRU {
             } else {
                 this.head = res.next;
                 res.next = null;
-                this.head.last = null;
+                this.head.before = null;
             }
             return res;
         }

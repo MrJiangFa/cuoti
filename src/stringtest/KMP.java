@@ -6,10 +6,7 @@ public class KMP {
     }
 
     public static int getIndexOf(String s, String m) {
-        if (m.length() < 1) {
-            return 0;
-        }
-        if (s == null || m == null || s.length() < m.length()) {
+        if (s == null || m == null || m.length() < 1 || s.length() < m.length()) {
             return -1;
         }
         char[] str1 = s.toCharArray();
@@ -33,6 +30,8 @@ public class KMP {
     }
 
     /**
+     * next[0]=-1,next[1]=0,next[i]= 最长公共前后缀长度
+     *
      * @param str2
      * @return
      */
