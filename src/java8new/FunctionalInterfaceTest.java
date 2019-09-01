@@ -66,4 +66,13 @@ public class FunctionalInterfaceTest {
         }
 
     }
+
+    private static void sort(Integer[] arr) {
+        Arrays.sort(arr, (o1, o2) -> {
+            if (o1 % 2 == 0 && o2 % 2 == 0) {
+                return o1 - o2;
+            }
+            return -1;
+        });
+    }
 }
