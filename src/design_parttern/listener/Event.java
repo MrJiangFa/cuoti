@@ -1,18 +1,23 @@
 package design_parttern.listener;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.EventObject;
 
-public class Event {
-    private List<Listener> list = new ArrayList<>();
+public abstract class Event extends EventObject {
+    private String msg;
+    private long timeStamp = System.currentTimeMillis();
 
-    public void addListener(Listener listener) {
-        list.add(listener);
+    public Event(Object source, String msg) {
+        super(source);
+        this.msg = msg;
     }
 
-    public void onListener() {
-        for (Listener listener : list) {
-            listener.process();
-        }
+    public long getTimeStam() {
+        return timeStamp;
     }
+
+    public String getMsg() {
+        return msg;
+    }
+
+
 }

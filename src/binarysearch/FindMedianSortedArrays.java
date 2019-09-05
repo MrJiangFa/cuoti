@@ -30,8 +30,9 @@ package binarysearch;
  * (2) B[j-1] <= A[i] and A[i-1] <= B[j]
  *
  *首先假设 A[i-1],B[j-1],A[i],B[j] 对于所有的i=0/i=m,j=0/j=n 都合理
- * Searching i in [0, m], to find an object `i` that:（此处进行合理假设 n>=m )
+ * Searching i in [0, m], to find an object `i` that:（此处进行合理假设 n>=m)
  *     B[j-1] <= A[i] and A[i-1] <= B[j], ( where j = (m + n + 1)/2 - i )
  */
 public class FindMedianSortedArrays {
+
 }

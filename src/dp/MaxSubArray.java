@@ -15,6 +15,7 @@ public class MaxSubArray {
         }
         return res;
     }
+
     private int getMax(int[] nums,int left,int right,int i){
         if(i==left){
             return nums[left];

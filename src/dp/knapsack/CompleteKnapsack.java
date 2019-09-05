@@ -2,17 +2,21 @@ package dp.knapsack;
 
 /**
  * leetcode322:硬币问题
+ * 给定不同面额的硬币coins，一个总金额 amount
+ * 编写函数计算可以凑成总金额所需的最少硬币数
  */
 public class CompleteKnapsack {
     public static void main(String[] args) {
-        System.out.println(process(new int[]{1, 2, 4}, 5, 0));
-        System.out.println(process(new int[]{1, 2, 4}, 3, 0));
-        System.out.println(process(new int[]{1, 2, 4}, 5, 1));
-        System.out.println(process(new int[]{1, 2, 4}, 5, 2));
-        System.out.println(process(new int[]{1, 2, 4}, 9, 2));
-        System.out.println(process(new int[]{1, 2, 5}, 11, 2));
-        System.out.println(leastCoin(new int[]{1, 2, 5}, 11));
-        System.out.println(process(new int[]{1, 2}, 2, 1));
+//        System.out.println(process(new int[]{1, 2, 4}, 5, 0));
+//        System.out.println(process(new int[]{1, 2, 4}, 3, 0));
+//        System.out.println(process(new int[]{1, 2, 4}, 5, 1));
+//        System.out.println(process(new int[]{1, 2, 4}, 5, 2));
+//        System.out.println(process(new int[]{1, 2, 4}, 9, 2));
+//        System.out.println(process(new int[]{1, 2, 5}, 11, 2));
+//        System.out.println(leastCoin(new int[]{1, 2, 5}, 11));
+//        System.out.println(process(new int[]{1, 2}, 2, 1));
+        int count=0;
+        System.out.println(1+count++);
     }
 
     public static int leastCoinDp(int[] coins, int amount) {
@@ -20,13 +24,32 @@ public class CompleteKnapsack {
             return -1;
         }
         int[][] dp = new int[coins.length][amount + 1];
-        for (int i = 0; i < coins.length; i++) {
-            dp[i][0] = 0;
+        for (int col = 0; col < dp[0].length; col++) {
+            dp[0][col] = col < coins[0] ? -1 : col % coins[0] == 0 ? col / coins[0] : -1;
         }
-//        for (int j = 0; j <){
-//
-//        }
-        return 0;
+        for (int row = 1; row < dp.length; row++) {
+            dp[row][0] = 0;
+        }
+        for (int row = 1; row < dp.length; row++) {
+            for (int col = 1; col < dp[0].length; col++) {
+                if (col < coins[row]) {
+                    dp[row][col] = dp[row - 1][col];
+                } else {
+                    int tmp = col;
+                    int res = Integer.MAX_VALUE;
+                    int count = 0;
+                    for (; tmp >= 0; tmp -= coins[row]) {
+                        if (dp[row - 1][tmp] != -1) {
+                            res = Math.min(res, dp[row - 1][tmp] + count++);
+                        } else {
+                            count++;
+                        }
+                    }
+                    dp[row][col] = res == Integer.MAX_VALUE ? -1 : res;
+                }
+            }
+        }
+        return dp[coins.length - 1][amount];
     }
 
     public static int leastCoin(int[] coins, int amount) {

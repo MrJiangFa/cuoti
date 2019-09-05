@@ -1,5 +1,7 @@
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.regex.Pattern;
 
 public class Test {
     public static void main(String[] args) {
@@ -26,54 +28,22 @@ public class Test {
 //        System.out.println(list.get(0));
 //        String s = "aa{{company}}";
 //        System.out.println(s.contains("^\\{\\{.+\\}\\}$"));
-        System.out.println(get(3, 3, 4));
-    }
-
-    private String test1() {
-        return null;
-    }
-
-    private void test() {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int[] nums = new int[n];
-        long denominator = 1;
-        for (int i = 0; i < n; i++) {
-            nums[i] = sc.nextInt();
-            denominator *= nums[i];
+        String s = "";
+        while (sc.hasNextLine()) {
+            String tmp = sc.nextLine().trim();
+            tmp.replaceAll("\\n|\\r", "");
+            s += tmp;
         }
 
-        Arrays.sort(nums);
-        int max = nums[nums.length - 1];
-        double[] dp = new double[max];
 
-        double[] rates = new double[max];
-        rates[0] = 1.0 / denominator;
-        for (int i = 1; i < max; i++) {
-            rates[i] = (Math.pow(i + 1, n) / ((double) denominator)) - rates[i - 1];
-        }
+        Pattern pattern1 = Pattern.compile("\\{(\\\"[a-zA-Z]*\\\")\\}");
+        Pattern pattern = Pattern.compile("\\{[\n\r\\s]*[a-zA-Z]+ \\}");
 
-        double result = 0;
-        for (int i = 0; i < max; i++) {
-            result += ((i + 1) * rates[i]);
-        }
-
-        System.out.println(result);
     }
 
-    private static int get(int n, int m, int k) {
-        int max = m * n;
-        int count = 0;
-        for (int i = max; i >= 1; i--) {
-            for (int j = Math.min(m, n); j >= 1; j--) {
-                if (i % j == 0 && (i / j <= Math.min(m, n))) {
-                    count++;
-                    if (count == k) {
-                        return i;
-                    }
-                }
-            }
-        }
-        return 1;
+    private static void test(String s) {
+
     }
+
 }
