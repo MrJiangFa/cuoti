@@ -22,6 +22,7 @@ class MyThread extends Thread {
 public class Demo1 {
     public static void main(String[] args){
         try {
+
             Thread t1 = new MyThread("t1");
             System.out.println(t1.getName() + " (" + t1.getState() + ") is new");
             t1.start();
