@@ -5,8 +5,7 @@ package stringtest;
  */
 public class Reverse {
     public static void main(String[] args) {
-        System.out.println(Integer.MAX_VALUE);
-        System.out.println(Integer.MIN_VALUE);
+        System.out.println(isValid("-+23"));
     }
 
     /**
@@ -73,7 +72,10 @@ public class Reverse {
      * @param str
      * @return
      */
-    public static int myAtio(String str) {
-        return 0;
+    public static boolean isValid(String str) {
+        if(str.matches("(\\-|\\+)\\d+")){
+            return true;
+        }
+        return false;
     }
 }

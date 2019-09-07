@@ -7,6 +7,8 @@ public class FindElementSizeBiggerThanHalf {
     /**
      * 首先将数组排序，如果存在超过半数的元素，那么排序后一定位于arr.len/2处
      * 时间复杂度为排序复杂度——》快排：O(NlogN)
+     * 举例：12223，22233,11222
+     * 只要数组中存在超过半数的数值，则该数值一定位于中间位置
      *
      * @param arr
      * @return
@@ -17,7 +19,7 @@ public class FindElementSizeBiggerThanHalf {
 
     /**
      * 分形页思路
-     * 每次去掉数组中不同的两个数，知道剩下的最后一个或最后两个元素，如果存在超过半数的元素，则一定在其中；
+     * 每次去掉数组中不同的两个数，直到剩下的最后一个或最后两个元素，如果存在超过半数的元素，则一定在其中；
      *
      * @param arr
      * @return
@@ -63,6 +65,7 @@ public class FindElementSizeBiggerThanHalf {
 
     /**
      * 时间复杂度为O(N)的解法
+     * 维护两个局部变量——指向当前数量最多的元素，如果有超过半数的元素，则一次循环过后剩下的数一定是该数
      */
     public int moreThanHalfNumber3(int[] array) {
         if (array == null || array.length == 0) {

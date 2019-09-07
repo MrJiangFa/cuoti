@@ -1,9 +1,6 @@
 package design_parttern;
 
 public class Singleton {
-    public static void main(String[] args) {
-
-    }
     /**
      * 懒汉式：用的时候再创建，线程不安全
      */
@@ -23,13 +20,12 @@ public class Singleton {
     /**
      * 采用synchronized关键字来保证线程安全性，排他锁影响效率；
      */
-    static class ThreadSaveLazySingleton {
-        private static ThreadSaveLazySingleton instance = null;
-        private ThreadSaveLazySingleton() {
-        }
-        public synchronized static ThreadSaveLazySingleton getInstance() {
-            if (instance == null) {
-                instance = new ThreadSaveLazySingleton();
+    static class ThreadSafeLazySingleton{
+        private static ThreadSafeLazySingleton instance = null;
+        private ThreadSafeLazySingleton(){}
+        public synchronized static ThreadSafeLazySingleton getInstance(){
+            if(instance==null){
+                instance = new ThreadSafeLazySingleton();
             }
             return instance;
         }
@@ -52,14 +48,11 @@ public class Singleton {
      * 懒汉式初始化，线程安全
      */
     static class DCLSingleton {
-        private volatile static DCLSingleton instance = null;
-        private DCLSingleton() {
-        }
-        public static DCLSingleton getInstance() {
+        private static DCLSingleton instance = null;
+        private DCLSingleton() {}
+        public synchronized static DCLSingleton getInstance() {
             if (instance == null) {
-                synchronized (DCLSingleton.class) {
-                    instance = new DCLSingleton();
-                }
+                instance = new DCLSingleton();
             }
             return instance;
         }
@@ -71,7 +64,7 @@ public class Singleton {
      */
     static class StaticInnerClassSingleton{
         private static class SingletonHolder{
-            private static final StaticInnerClassSingleton INSTANCE = new StaticInnerClassSingleton();
+            private static final StaticInnerClassSingleton INSTANCE = new StaticInnerClassSingleton(); // final关键字本身就有排他锁的含义
         }
         private StaticInnerClassSingleton(){}
         public static StaticInnerClassSingleton getInstance(){
@@ -86,4 +79,9 @@ public class Singleton {
         ISNSTANCE;
         public void whateverMethod(){}
     }
+
+    public static void main(String[] args) {
+
+    }
+
 }

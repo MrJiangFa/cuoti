@@ -1,8 +1,8 @@
 package binarysearchtree;
 
-import java.util.Stack;
+import java.util.*;
 
-public class Code_01_PreInPosTraversing {
+public class Code_01_PreInPosLevelTraversing {
 
     public static class Node {
         public int value;
@@ -43,7 +43,6 @@ public class Code_01_PreInPosTraversing {
     }
 
     public static void preOrderUnRecur(Node head) {
-        System.out.print("pre-order: ");
         if (head != null) {
             Stack<Node> stack = new Stack<Node>();
             stack.add(head);
@@ -81,7 +80,6 @@ public class Code_01_PreInPosTraversing {
 
     //
     public static void posOrderUnRecur1(Node head) {
-        System.out.print("pos-order: ");
         if (head != null) {
             Stack<Node> s1 = new Stack<Node>();
             Stack<Node> s2 = new Stack<Node>();
@@ -105,7 +103,6 @@ public class Code_01_PreInPosTraversing {
 
     //morris遍历
     public static void posOrderUnRecur2(Node h) {
-        System.out.print("pos-order: ");
         if (h != null) {
             Stack<Node> stack = new Stack<Node>();
             stack.push(h);
@@ -123,6 +120,52 @@ public class Code_01_PreInPosTraversing {
             }
         }
         System.out.println();
+    }
+
+    //非递归法进行层序遍历
+    private static void levelOrderUnrecur(Node head) {
+        if (head == null) {
+            return;
+        }
+        Queue<Node> queue = new LinkedList<>();
+        Set<Node> set = new HashSet<>();
+        queue.add(head);
+        set.add(head);
+        while (!queue.isEmpty()) {
+            Node node = queue.poll();
+            System.out.print(node.value + " ");
+            if (node.left != null && !set.contains(node.left)) {
+                queue.add(node.left);
+                set.add(node.left);
+            }
+            if (node.right != null && !set.contains(node.right)) {
+                queue.add(node.right);
+                set.add(node.right);
+            }
+        }
+        System.out.println();
+    }
+
+    private static void levelOrderRecur(Node head) {
+        List<List<Integer>> res = new ArrayList<>();
+        process(res, head, 0);
+        for (List<Integer> list : res) {
+            for (Integer n : list) {
+                System.out.print(n + " ");
+            }
+        }
+    }
+
+    private static void process(List<List<Integer>> list, Node head, int height) {
+        if (head == null) {
+            return;
+        }
+        if (height >= list.size())
+            list.add(new LinkedList<>());
+        list.get(height).add(head.value);
+        process(list, head.left, height + 1);
+        process(list, head.right, height + 1);
+
     }
 
     public static void main(String[] args) {
@@ -149,13 +192,22 @@ public class Code_01_PreInPosTraversing {
         System.out.print("pos-order: ");
         posOrderRecur(head);
         System.out.println();
+        System.out.print("level-order: ");
+        levelOrderRecur(head);
+        System.out.println();
 
         // unrecursive
         System.out.println("============unrecursive=============");
+        System.out.print("pre-order: ");
         preOrderUnRecur(head);
+        System.out.print("in-order: ");
         inOrderUnRecur(head);
+        System.out.print("post-order1: ");
         posOrderUnRecur1(head);
+        System.out.print("post-order2: ");
         posOrderUnRecur2(head);
+        System.out.print("level-order: ");
+        levelOrderUnrecur(head);
 
     }
 

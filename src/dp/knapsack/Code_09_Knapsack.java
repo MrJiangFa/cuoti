@@ -1,5 +1,7 @@
 package dp.knapsack;
 
+import java.util.*;
+
 public class Code_09_Knapsack {
 
 
@@ -60,13 +62,69 @@ public class Code_09_Knapsack {
         return dp[0][0];
     }
 
+    /**
+     * @param n：A B两个字符序列中元素个数
+     * @param i：i位置——索引
+     */
+
+    private static int process(String[] A, String[] B, int n, int i) {
+        if (i == 0) {
+            return A[i].equals(B[i]) ? 1 : 0;
+        }
+        int before = process(A, B, n, i - 1);
+        if (A[i].equals(B[i])) {
+            return before + 1;
+        }
+        int[] indexs = getSameFromeLast(A, B, i - 1);
+        for (int a = indexs[0] + 1; a < i; a++) {
+            if (B[i].equals(A[a])) {
+                return before + 1;
+            }
+        }
+        for (int b = indexs[1] + 1; b < i; b++) {
+            if (A[i].equals(B[b])) {
+                return before + 1;
+            }
+        }
+        return before;
+    }
+
+    /**
+     * 寻找从i开始向前第一个相同的元素
+     *
+     * @param A
+     * @param B
+     * @param i
+     * @return
+     */
+    private static int[] getSameFromeLast(String[] A, String[] B, int i) {
+        Map<String, Integer> mapOfA = new HashMap<>();
+        Map<String, Integer> mapOfB = new HashMap<>();
+        int[] res = new int[]{-1, -1};
+        while (i >= 0) {
+            if (mapOfB.containsKey(A[i])) {
+                res[0] = i;
+                res[1] = mapOfB.get(A[i]);
+                return res;
+            } else if (!mapOfA.containsKey(A[i])) {
+                mapOfA.put(A[i], i);
+            }
+            if (mapOfA.containsKey(B[i])) {
+                res[0] = mapOfA.get(B[i]);
+                res[1] = i;
+                return res;
+            } else if (!mapOfB.containsKey(B[i])) {
+                mapOfB.put(B[i], i);
+            }
+            i--;
+        }
+        return res;
+    }
+
+
     public static void main(String[] args) {
-        int[] c = {200, 600, 100, 180, 300, 450};
-        int[] p = {6, 10, 3, 4, 5, 8};
-        int bag = 1000;
-        System.out.println(processByDP(c, p, bag));
-        System.out.println(maxValue2(c, p, bag));
-        System.out.println(maxValue(c, p, bag));
+        System.out.println(process(new String[]{"1", "5", "4", "2", "3"}, new String[]{"5", "4", "3", "2", "1"}, 5, 4));
+        System.out.println(Arrays.toString(getSameFromeLast(new String[]{"1", "5", "4", "2", "3"}, new String[]{"5", "4", "3", "2", "1"},2)));
     }
 
 }

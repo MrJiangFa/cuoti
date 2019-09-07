@@ -7,23 +7,21 @@ public class LockInterruptiblyTest {
     private Lock lock = new ReentrantLock();
     public static void main(String[] args){
         LockInterruptiblyTest test = new LockInterruptiblyTest();
-        Thread thread1 = new Thread(){
-            public void run(){
-                try {
-                    test.insert(Thread.currentThread());
-                }catch (InterruptedException e){
-                    System.out.println(Thread.currentThread().getName()+"被中断");
-                }
-            }};
+        Thread thread1 = new Thread(() -> {
+            try {
+                test.insert(Thread.currentThread());
+            }catch (InterruptedException e){
+                System.out.println(Thread.currentThread().getName()+"被中断");
+            }
+        });
 
-        Thread thread2 = new Thread(){
-            public void run(){
-                try {
-                    test.insert(Thread.currentThread());
-                }catch (InterruptedException e){
-                    System.out.println(Thread.currentThread().getName()+"被中断");
-                }
-            }};
+        Thread thread2 = new Thread(() -> {
+            try {
+                test.insert(Thread.currentThread());
+            }catch (InterruptedException e){
+                System.out.println(Thread.currentThread().getName()+"被中断");
+            }
+        });
         thread1.start();
         thread2.start();
         try{

@@ -1,23 +1,15 @@
 package stringtest;
 
+/**
+ * 求一个字符串中的最长回文子串
+ */
 public class IsPalindrome {
     public static void main(String[] args) {
-        String tmp = "bb";
-        IsPalindrome isPalindrome = new IsPalindrome();
-        String t = "";
-        boolean[][] arr = IsPalindrome.dp(tmp);
-        for (int i = arr.length - 1; i >= 0; i--) {
-            for (int j = i; j < arr.length; j++) {
-                if (arr[i][j] && (j - i + 1) > t.length()) {
-                    t = tmp.substring(i, j + 1);
-                }
-            }
-        }
-        System.out.println(t);
+        System.out.println(longestPalindrome("cabbad"));
     }
 
     //采用递归做超出时间限制
-    public String longestPalindrome(String s) {
+    public static String longestPalindrome(String s) {
         if (s.length() < 2 || s == null) {
             return s;
         }
@@ -47,6 +39,7 @@ public class IsPalindrome {
     }
 
     //采用动态规划
+    //i 从 arr.length-1 开始向前，j 从 i 开始向后 i~j 之间是否为回文串；
     public static boolean[][] dp(String s) {
         int len = s.length();
         boolean[][] arr = new boolean[len][len];

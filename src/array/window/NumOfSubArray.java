@@ -1,14 +1,13 @@
 package array.window;
 
 import array.SubarrayMaxSum;
-
 import java.util.LinkedList;
 
 public class NumOfSubArray extends  SubarrayMaxSum{
     /**
      * @param arr:待求解数组
-     * @param num：子数组满足 max-min<=num
-     * @return: 返回所有满足max-min<=num的子数组的个数
+     * @param num:子数组满足 max-min<=num
+     * @return: 返回所有满足 max-min<=num 的子数组的个数
      */
     public static int getNumOfSub(int[] arr, int num) {
         if (arr == null || arr.length == 0) {
@@ -40,17 +39,13 @@ public class NumOfSubArray extends  SubarrayMaxSum{
             if (qmax.peekFirst() == L) {
                 qmax.pollFirst();
             }
-            res += R - L;
+            res += R - L;//索引 L--R 之间
             L++;
         }
         return res;
-
     }
 
-
-
     public static void main(String[] args) {
-
         System.out.println(getNumOfSub(new int[]{2, 2}, 1));
     }
 }

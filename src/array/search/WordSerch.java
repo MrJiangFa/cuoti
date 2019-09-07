@@ -12,21 +12,26 @@ package array.search;
  * 给定 word = "SEE", 返回 true.
  * 给定 word = "ABCB", 返回 false.
  * <p>
- *
+ * <p>
  * leetcode 79
  * 问题的关键在于：标记已经使用过的字符
- *
  */
 public class WordSerch {
     public static void main(String[] args) {
-        exist(new char[][]{{'a', 'a'}}, "aaa");
+        System.out.println(exist(new char[][]{{'a', 'a'}}, 1, 2, "aaa".toCharArray(), 2));
     }
 
     public static boolean exist(char[][] board, String word) {
-        char[] w = word.toCharArray();
-        for (int y = 0; y < board.length; y++) {
-            for (int x = 0; x < board[y].length; x++) {
-                if (exist(board, y, x, w, 0)) return true;
+        boolean[][][] res = new boolean[board.length + 2][board[0].length + 2][word.length() + 1];
+        for (int index = 0; index < res[0][0].length; index--) {
+            for (int x = 1; x < res.length - 1; x++) {
+                for (int y = 1; y < res[0].length - 1; y++) {
+                    if (board[x - 1][y - 1] != word.charAt(index)) {
+                        res[x][y][index] = false;
+                    } else {
+
+                    }
+                }
             }
         }
         return false;

@@ -1,29 +1,25 @@
 package multithread.thread_pool;
 
-import java.util.ArrayDeque;
-import java.util.Queue;
 import java.util.concurrent.*;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ThreadPoolTest {
     public static void main(String[] args) {
-        final Queue<Runnable> runnables = new ArrayDeque<>();//
         ExecutorService pool = Executors.newFixedThreadPool(3);
-        pool.submit(new Runnable() {
-            @Override
-            public void run() {
-
+        ThreadPoolExecutor pool2 = new ThreadPoolExecutor(5, 10, 10, TimeUnit.SECONDS, new ArrayBlockingQueue<>(100));
+        pool.execute(() -> {
+            for (int i = 0; i < 10000; i++) {
+                System.out.println("Thread1：" + i);
             }
         });
-        pool.submit(new Callable<Object>() {
-            @Override
-            public Object call() throws Exception {
-                return null;
+        pool.submit(() -> {
+            for (int i = 0; i < 10000; i++) {
+                System.out.println("Thread2：" + i);
             }
         });
-
     }
+
     ReentrantLock lock = new ReentrantLock();
     Condition c1 = lock.newCondition();
     Executor executor = Executors.newSingleThreadExecutor();
