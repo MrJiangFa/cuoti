@@ -30,12 +30,12 @@ import java.util.List;
  * G(n) = G(0) * G(n-1) + G(1) * G(n-2) + … + G(n-1) * G(0)
  * G(i) = F(0,i-1)+F(1,i-2)+……+F(i-1,0) = G(0)*G(i-1)+G(1)*G(i-2)+……G(i-1)*G(0)
  */
-public class Code_96_Solution {
+public class Code_96_NumOfBST {
     public static void main(String[] args) {
-        System.out.println(numTrees(3));
+        System.out.println(numOfBST(4));
     }
 
-    public static int numTrees(int n) {
+    public static int numOfBST(int n) {
         if (n == 0 || n == 1) {
             return 0;
         }
@@ -86,7 +86,6 @@ public class Code_96_Solution {
                     list.add(root);
                 }
             }
-
         }
         return list;
     }

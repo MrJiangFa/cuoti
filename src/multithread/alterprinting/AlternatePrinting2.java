@@ -1,7 +1,7 @@
 package multithread.alterprinting;
 
 public class AlternatePrinting2 {
-    private static Object lock = new Object();
+    private static final Object lock = new Object();
     private static volatile int count = 0;
 
     static class ThreadA extends Thread {

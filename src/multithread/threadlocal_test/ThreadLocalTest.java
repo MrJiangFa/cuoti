@@ -1,4 +1,4 @@
-package multithread;
+package multithread.threadlocal_test;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -47,6 +47,9 @@ public class ThreadLocalTest {
         list.forEach((i) -> System.out.println("获得索引为奖品为" + (i == IPHONE ? "iphone" : "ipad")));
         Arrays.stream(arr).forEach(System.out::println);
     }
+
+
+
 
     private static void testThreadLocal() {
         ThreadLocal<String> localName = new ThreadLocal<>();

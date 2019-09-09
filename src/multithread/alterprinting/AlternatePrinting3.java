@@ -65,12 +65,72 @@ public class AlternatePrinting3 {
     }
 
     public static void main(String[] args) {
+//        ReentrantLock lock = new ReentrantLock();
+//        Condition A = lock.newCondition();
+//        Condition B = lock.newCondition();
+//        Condition C = lock.newCondition();
+//        new MyThread3("A", lock, A, B, C).start();
+//        new MyThread3("B", lock, A, B, C).start();
+//        new MyThread3("C", lock, A, B, C).start();
+        alterPrint1To100();
+    }
+
+    private static void alterPrint1To100() {
         ReentrantLock lock = new ReentrantLock();
-        Condition A = lock.newCondition();
-        Condition B = lock.newCondition();
-        Condition C = lock.newCondition();
-        new MyThread3("A", lock, A, B, C).start();
-        new MyThread3("B", lock, A, B, C).start();
-        new MyThread3("C", lock, A, B, C).start();
+        Condition condition1 = lock.newCondition();
+        Condition condition2 = lock.newCondition();
+        Condition condition3 = lock.newCondition();
+        AtomicInteger num = new AtomicInteger(1);
+        new Thread(() -> {
+            try {
+                lock.lock();
+                while (num.intValue() <= 100) {
+                    if (num.intValue() % 3 == 1) {
+                        System.out.println("Thread1:" + num.getAndIncrement());
+                        condition2.signal();
+                    } else {
+                        condition1.await();
+                    }
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                lock.unlock();
+            }
+        }).start();
+        new Thread(() -> {
+            try {
+                lock.lock();
+                while (num.intValue() <= 98) {
+                    if (num.intValue() % 3 == 2) {
+                        System.out.println("Thread2:" + num.getAndIncrement());
+                        condition3.signal();
+                    } else {
+                        condition2.await();
+                    }
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                lock.unlock();
+            }
+        }).start();
+        new Thread(() -> {
+            try {
+                lock.lock();
+                while (num.intValue() <= 99) {
+                    if (num.intValue() % 3 == 0) {
+                        System.out.println("Thread3:" + num.getAndIncrement());
+                        condition1.signal();
+                    } else {
+                        condition3.await();
+                    }
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                lock.unlock();
+            }
+        }).start();
     }
 }

@@ -1,6 +1,7 @@
 package recursive.backtrack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -11,6 +12,23 @@ import java.util.List;
  * subsets问题：leetcode
  */
 public class Code_03_Print_All_Subsquences {
+
+    public static void main(String[] args) {
+//        printSub("abcd".toCharArray(),0,"");
+//        List<List<Integer>> list = subsets(new int[]{1,2,3});
+//        Object[] obs = list.toArray();
+//        Arrays.sort(obs);
+//        for(List<Integer> l : list){
+//            System.out.println(Arrays.toString(l.toArray()));
+//        }
+        int i = 0;
+        for(;i<10;i++){
+            if(i==9){
+                break;
+            }
+        }
+        System.out.println(i);
+    }
 
     /**
      * @param chars：待求的字符串数组
@@ -29,16 +47,17 @@ public class Code_03_Print_All_Subsquences {
     /**
      * 采用递归的方式实现回溯法
      *
+     *
      * @param nums
      * @return
      */
-    public List<List<Integer>> subsets(int[] nums) {
+    public static List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> list = new ArrayList<>();
         backtrack(new ArrayList<>(), list, 0, nums);
         return list;
     }
 
-    public void backtrack(List<Integer> tmpList, List<List<Integer>> list, int i, int[] nums) {
+    public static void backtrack(List<Integer> tmpList, List<List<Integer>> list, int i, int[] nums) {
         list.add(new ArrayList<>(tmpList));
         for (int index = i; index < nums.length; index++) {
             tmpList.add(nums[index]);
@@ -58,7 +77,7 @@ public class Code_03_Print_All_Subsquences {
      */
     public List<List<Integer>> subsets2(int[] nums) {
         List<List<Integer>> list = new ArrayList<>();
-        list.add(new ArrayList<>());
+        list.add(new ArrayList<>());    //先加一个没有元素的列表
         for (int i = 0; i < nums.length; i++) {
             int size = list.size();
             for (int j = 0; j < size; j++) {
@@ -72,6 +91,7 @@ public class Code_03_Print_All_Subsquences {
 
     /**
      * 对于数组中的任意元素，只有在子集和中和不在子集和中两种情况；
+     * 事先划分好结果对立中有多少个
      *
      * @param nums
      * @return

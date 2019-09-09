@@ -44,7 +44,7 @@ public class Code_01_PreInPosLevelTraversing {
 
     public static void preOrderUnRecur(Node head) {
         if (head != null) {
-            Stack<Node> stack = new Stack<Node>();
+            Stack<Node> stack = new Stack<>();
             stack.add(head);
             while (!stack.isEmpty()) {
                 head = stack.pop();
@@ -61,9 +61,8 @@ public class Code_01_PreInPosLevelTraversing {
     }
 
     public static void inOrderUnRecur(Node head) {
-        System.out.print("in-order: ");
         if (head != null) {
-            Stack<Node> stack = new Stack<Node>();
+            Stack<Node> stack = new Stack<>();
             while (!stack.isEmpty() || head != null) {
                 if (head != null) {
                     stack.push(head);
@@ -78,11 +77,11 @@ public class Code_01_PreInPosLevelTraversing {
         System.out.println();
     }
 
-    //
+    //后续遍历非递归方法
     public static void posOrderUnRecur1(Node head) {
         if (head != null) {
-            Stack<Node> s1 = new Stack<Node>();
-            Stack<Node> s2 = new Stack<Node>();
+            Stack<Node> s1 = new Stack<>();
+            Stack<Node> s2 = new Stack<>();
             s1.push(head);
             while (!s1.isEmpty()) {
                 head = s1.pop();
@@ -165,7 +164,6 @@ public class Code_01_PreInPosLevelTraversing {
         list.get(height).add(head.value);
         process(list, head.left, height + 1);
         process(list, head.right, height + 1);
-
     }
 
     public static void main(String[] args) {
@@ -208,7 +206,6 @@ public class Code_01_PreInPosLevelTraversing {
         posOrderUnRecur2(head);
         System.out.print("level-order: ");
         levelOrderUnrecur(head);
-
     }
 
 }

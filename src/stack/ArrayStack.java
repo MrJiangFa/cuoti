@@ -1,6 +1,8 @@
 package stack;
 
+import java.util.ArrayList;
 import java.util.Stack;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * pop,push,getMin的时间复杂度都为O(1)
@@ -65,6 +67,6 @@ public class ArrayStack<E> {
                 throw new RuntimeException("Your stack is empty");
             }
             return this.stackMin.peek();
-    }
+        }
     }
 }

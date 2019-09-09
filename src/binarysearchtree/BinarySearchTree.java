@@ -6,6 +6,7 @@ import java.util.Stack;
 
 /**
  * 递归和非递归方法的二叉树遍历都使用了O(h)的空间复杂度，h表示二叉树的高度；
+ *
  * @param <AnyType>
  */
 public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
@@ -20,6 +21,13 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
         bt.insert(5);
         for (int i = 0; i < 10; i++) {
             bt.insert(i);
+        }
+    }
+
+    //morris遍历实现O(N)时间复杂度，O(1)空间复杂度的遍历方式
+    public static void morrisIn(Node head) {
+        if (head == null) {
+
         }
     }
 
@@ -100,11 +108,11 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
             t.left = remove(x, t.left);
         } else if (comparedResult > 0) {
             t.right = remove(x, t.right);
-        } else if (t.left != null & t.right != null) {
-            t.element = findMin(t.right).element;
+        } else if (t.left != null && t.right != null) {//是在comparedResult==0的前提下
+            t.element = findMin(t.right).element;      //找到右子树的最小值对应的节点，并将其代替被删除的节点，同时将右子树中对应最小值的节点删除
             t.right = remove(t.element, t.right);
         } else {
-            t = (t != null) ? t.left : t.right;
+            t = (t.left != null) ? t.left : t.right;
         }
         return t;
     }
@@ -133,7 +141,6 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
         }
     }
 
-
     //先序遍历非递归实现
     private void preOrderRecur(Node<AnyType> head) {
         System.out.print("pre-order: ");
@@ -159,7 +166,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
     //当前节点不为空，当前节点压入栈，当前节点往左
     private void midOrderRecur(Node<AnyType> head) {
         System.out.print("mid-order: ");
-        if(head!=null) {
+        if (head != null) {
             LinkedList<Node<AnyType>> stack = new LinkedList<>();
             while (head != null || !stack.isEmpty()) {
                 if (head != null) {//向将左边界全部压入栈中
@@ -167,7 +174,7 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
                     head = head.left;
                 } else {
                     head = stack.pop();
-                    System.out.print(head.element+" ");
+                    System.out.print(head.element + " ");
                     head = head.right;
                 }
             }
@@ -175,24 +182,24 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
     }
 
     //后序遍历
-    private void postOrderRecur(Node<AnyType> head){
+    private void postOrderRecur(Node<AnyType> head) {
         System.out.print("post-order: ");
-        if(head!=null){
+        if (head != null) {
             Stack<Node<AnyType>> s1 = new Stack<>();
             Stack<Node<AnyType>> s2 = new Stack<>();
             s1.push(head);
-            while(!s1.isEmpty()){
+            while (!s1.isEmpty()) {
                 head = s1.pop();
                 s2.push(head);
-                if(head.left!=null){
+                if (head.left != null) {
                     s1.push(head.left);
                 }
-                if(head.right!=null){
+                if (head.right != null) {
                     s1.push(head.right);
                 }
             }
-            while(!s2.isEmpty()){
-                System.out.println(s2.pop().element+" ");
+            while (!s2.isEmpty()) {
+                System.out.println(s2.pop().element + " ");
             }
         }
         System.out.println();
@@ -232,14 +239,6 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
             }
         }
     }
-
-    //morris遍历实现O(N)时间复杂度，O(1)空间复杂度的遍历方式
-    public static void morrisIn(Node head){
-        if(head==null){
-
-        }
-    }
-
 
     private static class Node<AnyType> {
         AnyType element;

@@ -1,4 +1,7 @@
-import java.util.Collection;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Test {
@@ -28,79 +31,85 @@ public class Test {
 //        System.out.println(s.contains("^\\{\\{.+\\}\\}$"));
 //        System.out.println("a".substring(0,0).equals(""));
 //    }
-    public static class Node {
-        public int value;
-        public Node left;
-        public Node right;
 
-        public Node(int data) {
-            this.value = data;
+
+    //s的i位置及之前的所有字符串的处理步骤
+//    public static List<String> process(String s, int i) {
+//        List<String> list = new ArrayList<>();
+//        if (i == 0) {
+//            list.add((i) + " " + 0);
+//            list.add(s.charAt(i) + " " + 0);
+//            return list;
+//        }
+//        if (i == 1) {
+//            if (s.charAt(i) == s.charAt(i - 1)) {
+//                list.add(s.charAt(i) + " " + i);
+//                return list;
+//            } else {
+//                list.add(s.charAt(i - 1) + " " + 0);
+//                list.add(s.charAt(i - 1) + " " + 0);
+//                list.add(s.charAt(i) + " " + 0);
+//                list.add(s.charAt(i) + " " + 0);
+//                return list;
+//            }
+//        }
+//
+//        return list;
+//    }
+
+    public static void main(String[] args) {
+        get("12223");
+    }
+
+    public static void get(String s) {
+        List<String> res = process(s, s.length() - 1);
+        Object[] resArr = res.toArray();
+        Arrays.sort(resArr);
+        for (int i = 0; i < resArr.length; i++) {
+            System.out.println(resArr[i]);
         }
     }
-    private static void inOrder(Node head){
-        if (head == null) {
-            return;
+
+    public static void getResult() {
+        Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        List<String> res = process(input, input.length() - 1);
+        String[] resArr = (String[]) res.toArray();
+        Arrays.sort(resArr);
+        for (int i = 0; i < resArr.length; i++) {
+            System.out.println(resArr[i]);
         }
-        inOrder(head.left);
-        System.out.print(head.value);
-        inOrder(head.right);
     }
-    static Node solution(String input) {
-        if(input==null||input.trim().length()==0){
-            return null;
+
+    public static List<String> process(String s, int i) {
+        List<String> list = new ArrayList<>();
+        if (i == 0) {
+            list.add((char) (Integer.valueOf(s.charAt(i) + "") - 1 + 'A') + "");
+            return list;
         }
-        int start = input.indexOf("(");
-        int end = input.lastIndexOf(")");
-        if(start<0){
-            return new Node(Integer.valueOf(input));
-        }
-        Node head = new Node(Integer.valueOf(input.substring(0,start)));
-        int tmp = input.indexOf(",");
-        if(input.charAt(start+1)==','){
-            head.left = null;
-        }else{
-            int indexOfMid = 0;
-            int count = Integer.MAX_VALUE;
-            for(int i = start+1;i<input.length();i++){
-                if(input.charAt(i)==','&&count==Integer.MAX_VALUE){
-                    head.left = new Node(Integer.valueOf(input.substring(start+1,i)));
-                    indexOfMid = i;
-                    break;
-                }
-                if(input.charAt(i)=='('&&count==Integer.MAX_VALUE){
-                    count=1;
-                }else if(input.charAt(i)=='('&&count!=Integer.MAX_VALUE){
-                    count++;
-                }else if(input.charAt(i)==')'){
-                    count--;
-                    if(count==0){
-                        indexOfMid=i+1;
-                        tmp = indexOfMid;
-                        break;
-                    }
-                }
+        if (i == 1) {
+            list.add((char) (Integer.valueOf(s.charAt(i - 1) + "") - 1 + 'A') + "" + (char) (Integer.valueOf(s.charAt(i) + "") - 1 + 'A'));
+            if (Integer.valueOf(s.substring(0, i + 1)) <= 26) {
+                list.add((char) (Integer.valueOf(s.substring(0, i + 1)) - 1 + 'A') + "");
             }
-            head.left = solution(input.substring(start+1,indexOfMid));
+            return list;
         }
-        if(input.charAt(end-1)==','){
-            head.right = null;
-        }else{
-            head.right = solution(input.substring(tmp+1,end));
+        List<String> before = process(s, i - 1);
+        int sizeOfBefore = before.size();
+        for (int count = 0; count < sizeOfBefore; count++) {
+            String tmp = before.remove(0);
+            list.add(tmp + (char) (Integer.valueOf(s.charAt(i) + "") - 1 + 'A'));
         }
-        return head;
+        List<String> bbefore = process(s, i - 2);
+        int sizeOfBB = bbefore.size();
+        for (int count = 0; count < sizeOfBB; count++) {
+            String tmp = bbefore.remove(0);
+            if (Integer.valueOf(s.substring(i - 1, i + 1)) <= 26) {
+                list.add(tmp + (char) (Integer.valueOf(s.substring(i - 1, i + 1)) - 1 + 'A'));
+            }
+        }
+        return list;
     }
 
-    public static void main(String[] args){
-        Scanner in = new Scanner(System.in);
 
-        String _input;
-        try {
-            _input = in.nextLine();
-        } catch (Exception e) {
-            _input = null;
-        }
-
-        Node head = solution(_input);
-        inOrder(head);
-    }
 }
