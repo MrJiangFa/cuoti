@@ -1,8 +1,5 @@
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Test {
 //    public static void main(String[] args) {
@@ -58,16 +55,38 @@ public class Test {
 //    }
 
     public static void main(String[] args) {
-        get("12223");
+        List<List<Integer>> list = new ArrayList<>();
+        list.add(Arrays.asList(1,3,12));
+        list.add(Arrays.asList(2,0,2));
+        list.add(Arrays.asList(1,1,4));
+        list.add(Arrays.asList(1,3,2));
+        list.add(Arrays.asList(2,0,4));
+        list.add(Arrays.asList(2,2,4));
+        List<Integer> res = get(list);
+        res.forEach(System.out::println);
     }
 
-    public static void get(String s) {
-        List<String> res = process(s, s.length() - 1);
-        Object[] resArr = res.toArray();
-        Arrays.sort(resArr);
-        for (int i = 0; i < resArr.length; i++) {
-            System.out.println(resArr[i]);
+    public static List<Integer> get(List<List<Integer>> queries) {
+        Map<Integer,Integer> map =new HashMap<>();
+        List<Integer> l = new ArrayList<>();
+        for(List<Integer> list : queries){
+            if(list.get(0)==1){
+                if(!map.containsKey(list.get(0))){
+                    map.put(list.get(1),list.get(2));
+                }else{
+                    map.put(list.get(1),map.get(list.get(1))+list.get(2));
+                }
+            }else {
+                int count = 0;
+                for(int i = list.get(1);i<=list.get(2);i++){
+                    if(map.containsKey(i)){
+                        count+=map.get(i);
+                    }
+                }
+                l.add(count);
+            }
         }
+        return l;
     }
 
     public static void getResult() {

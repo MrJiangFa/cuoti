@@ -3,6 +3,7 @@ package multithread;
 import com.sun.corba.se.impl.orbutil.concurrent.Sync;
 
 import java.util.HashMap;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class NoVisibility {
     private static boolean ready;

@@ -28,7 +28,7 @@ public class BubbleSort {
     }
 
     /**
-     * 相邻数之间比较，然后不断上浮；
+     * 从最后一个数开始，相邻数之间比较，然后不断上浮；
      *
      * @param arr
      * @return
@@ -46,7 +46,12 @@ public class BubbleSort {
         }
     }
 
-    //选择排序
+    /**
+     * 选择排序
+     *
+     * @param arr
+     * @return
+     */
     public static int[] selectionSort(int[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
             int minIndex = i;
@@ -58,7 +63,12 @@ public class BubbleSort {
         return arr;
     }
 
-    //插入排序
+    /**
+     * 插入排序：
+     *
+     * @param arr：待排序数组
+     * @return
+     */
     public static int[] insertSort(int[] arr) {
         for (int i = 1; i < arr.length; i++) {
             for (int j = i - 1; j >= 0 && arr[j] > arr[j + 1]; j--) {
@@ -67,6 +77,8 @@ public class BubbleSort {
         }
         return arr;
     }
+
+
 
     private static void swap(int[] arr, int i, int j) {
 //        arr[i]=arr[i]^arr[j];

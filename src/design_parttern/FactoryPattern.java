@@ -1,5 +1,8 @@
 package design_parttern;
 
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * 创建型模式：五种——工厂方法模式、抽象工厂模式、单列模式、建造者模式（使用多个简单的对象构建成一个复杂的对象）、原型模式
  * 六大原则：
@@ -31,7 +34,7 @@ public class FactoryPattern {
      * 简单工厂方法
      */
     static class SimpleSenderFactory {
-        public Sender produce(String type) {
+        public static Sender newSender(String type) {
             if ("mail".equals(type)) {
                 return new MailSender();
             } else if ("sms".equals(type)) {
@@ -58,26 +61,53 @@ public class FactoryPattern {
     }
 
     /**
+     * 抽象工厂模式
+     *
      * 直接修改工厂类违反了闭包原则
      * 采用抽象工厂模式创建多个工厂类，一旦增加新功能的时候，增加新的类——需要增加工厂接口
      */
     interface Factory {
-        Sender produce();
+        Sender newSender();
     }
 
     static class MailSenderFactory implements Factory {
         @Override
-        public Sender produce() {
+        public Sender newSender() {
             return new MailSender();
         }
     }
 
     static class SmsSenderFactory implements Factory {
         @Override
-        public Sender produce() {
+        public Sender newSender() {
             return new SmsSender();
         }
 
     }
 
+    //简单工厂方法
+    public class ThreadFactoryImpl implements ThreadFactory {
+        private final AtomicInteger poolNumber = new AtomicInteger(1);
+        private final ThreadGroup group;
+        private final AtomicInteger threadNumber = new AtomicInteger(1);
+        private final String namePrefix;
+
+        ThreadFactoryImpl() {
+            SecurityManager s = System.getSecurityManager();
+            group = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();
+            namePrefix = "pool-" + poolNumber.getAndIncrement() + "-thread-";
+        }
+
+        @Override
+        public Thread newThread(Runnable r) {
+            Thread t = new Thread(group, r, namePrefix + threadNumber.getAndIncrement(), 0);
+            if (t.isDaemon()) {
+                t.setDaemon(false);
+            }
+            if (t.getPriority() != Thread.NORM_PRIORITY) {
+                t.setPriority(Thread.NORM_PRIORITY);
+            }
+            return t;
+        }
+    }
 }

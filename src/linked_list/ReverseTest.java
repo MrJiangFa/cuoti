@@ -28,13 +28,15 @@ public class ReverseTest {
         head = dummy.next;
     }
     //方法2，新建链表法
+    //利用栈结构将数据放置数组中，然后新建一个反转链表；
 
     public static void main(String[] args){
         ReverseTest rt  = new ReverseTest();
         rt.head = new Node(1);
         rt.head.next = new Node(2);
         rt.head.next.next  = new Node(3);
+        rt.head.next.next.next = new Node(4);
         rt.reverse();
-        System.out.println(rt.head.value+" "+rt.head.next.value+" "+rt.head.next.next.value);
+        System.out.println(rt.head.value+" "+rt.head.next.value+" "+rt.head.next.next.value+" "+rt.head.next.next.next.value);
     }
 }

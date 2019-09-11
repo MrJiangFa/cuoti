@@ -30,11 +30,11 @@ public class HeapSort<AnyType extends Comparable<? super AnyType>> {
 
     //建堆的时间复杂度为O(N)
     public void heapInsert(AnyType[] arr, int index) {
-        //index=0时，-1/2 = 0表示的也是0位置的点
-        while ((arr[index].compareTo(arr[(index - 1) / 2])) > 0) {
-            swap(arr, index, (index - 1) / 2);
-            index = (index - 1) / 2;
-        }
+            //index=0时，-1/2 = 0表示的也是0位置的点
+            while ((arr[index].compareTo(arr[(index - 1) / 2])) > 0) {
+                swap(arr, index, (index - 1) / 2);
+                index = (index - 1) / 2;
+            }
     }
 
     /**

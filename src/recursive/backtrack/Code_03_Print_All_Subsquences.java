@@ -46,8 +46,6 @@ public class Code_03_Print_All_Subsquences {
 
     /**
      * 采用递归的方式实现回溯法
-     *
-     *
      * @param nums
      * @return
      */

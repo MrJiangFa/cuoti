@@ -97,7 +97,6 @@ public class CompleteKnapsack {
                     numOfIth++;
                 } else {
                     numOfIth++;
-                    continue;
                 }
             }
             if (resOfIth == Integer.MAX_VALUE) {

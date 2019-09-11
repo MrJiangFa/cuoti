@@ -8,21 +8,30 @@ public class APIMatch {
     public static void main(String[] args) {
 //        System.out.println(Pattern.matches("\\d*(\\.)\\d+", ".."));
 //        pattern1();
-        System.out.println(Pattern.matches("\\\\d", "1"));
-        System.out.println("" + '\\');
-        Pattern pattern = Pattern.compile("(?<group0>a*)(?<group1>b*)");//在正则表达式中通过  ?<name> 的方式给分组命名
-        String wait = "abbbbaaa";
-        Matcher matcher = pattern.matcher(wait);
-        matcher.find();
-        System.out.println(matcher.group("group0"));
-        System.out.println(matcher.group("group1"));
-        System.out.println(wait.replaceAll("a+", "${jj}"));
-        System.out.println(wait.replaceAll("a+", "$"));//非法的组引用，缺少组索引
-        System.out.println(wait.replaceAll("a+", "\\"));//缺少要转义的字符
-        System.out.println("${}");
-        System.out.println("\\\ta");
-        System.out.println("\\.");
-        System.out.println("a\\{");
+//        System.out.println(Pattern.matches("\\\\d", "1"));
+//        System.out.println("" + '\\');
+//        Pattern pattern = Pattern.compile("(?<group0>a*)(?<group1>b*)");//在正则表达式中通过  ?<name> 的方式给分组命名
+//        String wait = "abbbbaaa";
+//        Matcher matcher = pattern.matcher(wait);
+//        matcher.find();
+//        System.out.println(matcher.group("group0"));
+//        System.out.println(matcher.group("group1"));
+//        System.out.println(wait.replaceAll("a+", "${jj}"));
+//        System.out.println(wait.replaceAll("a+", "$"));//非法的组引用，缺少组索引
+//        System.out.println(wait.replaceAll("a+", "\\"));//缺少要转义的字符
+//        System.out.println("${}");
+//        System.out.println("\\\ta");
+//        System.out.println("\\.");
+//        System.out.println("a\\{");
+        System.out.println(replace("aaabbb333dsdfsdf", "bd"));
+    }
+
+    private static String replace(String s, String repl) {
+//        Pattern pattern = Pattern.compile("[" + repl + "]"); //通过此种方式将字符串转化为正则表达式
+//        Matcher matcher = pattern.matcher(s);
+//        matcher.replaceAll("");
+        String res = s.replaceAll("[" + repl + "]", "");
+        return res;
     }
 
     private static void pattern1() {
@@ -98,6 +107,5 @@ public class APIMatch {
             }
         }
         return null;
-
     }
 }

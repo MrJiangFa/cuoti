@@ -11,11 +11,14 @@ import java.util.HashMap;
  * 。。。
  * 将所有结果累加，就是最终有多少种构成方法
  * 对于dp问题，可以观看进阶版7视频
+ *
+ * 对比：完全背包问题，一个 coins 数组表示可用的钱币数目对应的
  */
 public class MoneyProblem {
     public static void main(String[] args){
         System.out.println(getResult(new int[]{1,2,3},4));
     }
+
     public static int getResult(int[] arr, int aim) {
         if (arr == null || arr.length == 0 || aim < 0) {
             return 0;
@@ -65,7 +68,7 @@ public class MoneyProblem {
         } else {
             for (int numOfCoins = 0; numOfCoins * arr[index] <= aim; numOfCoins++) {
                 int nextAim = aim - numOfCoins * arr[index];
-                String key = String.valueOf(index + 1) + "_" + nextAim;
+                String key = (index + 1) + "_" + nextAim;
                 if (hashMap.containsKey(key)) {
                     res += hashMap.get(key);
                 } else {
@@ -73,7 +76,7 @@ public class MoneyProblem {
                 }
             }
         }
-        hashMap.put(String.valueOf(index) + "_" + aim, res);
+        hashMap.put(index + "_" + aim, res);
         return res;
     }
 
