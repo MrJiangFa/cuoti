@@ -22,13 +22,11 @@ public class Code_05_Prim {
     }
 
     /**
-     *
      * @param graph
      * @return
      */
     public static Set<Edge> primMST(Graph graph) {
-        PriorityQueue<Edge> priorityQueue = new PriorityQueue<>(
-                new EdgeComparator());
+        PriorityQueue<Edge> priorityQueue = new PriorityQueue<>(new EdgeComparator());
         HashSet<Node> set = new HashSet<>();
         Set<Edge> result = new HashSet<>();
         for (Node node : graph.nodes.values()) {
@@ -83,28 +81,34 @@ public class Code_05_Prim {
      * 排列组合求解TSP（Traveling Salesman Problem,旅行商问题)问题，暴力法，没有什么物理意义，难以表示成dp形式
      * 旅行商问题：从一点出发，经过几座城市，又回到出发点，求怎么走路径最短
      */
-    static Queue<Queue<Integer>> res = new LinkedList<>();
+//    public static void getResult(List<List<Integer>> res,List<Integer> tmpList,int N, int i) {
+//        if (i == N) {
+//            res.add(new ArrayList<>(tmpList));
+//            return;
+//        }
+//        for (int j = 1; j <= N; j++) {
+//            if (!queue.contains(j)) {
+//                queue.offer(j);
+//                getResult(N, i + 1, queue);
+//            }
+//        }
+//    }
 
-    public static void getResult(int[] nodes, int i, Queue<Integer> queue) {
-        if (i == nodes.length) {
-            res.add(queue);
-            return;
-        }
-        for (int j = 1; j <= nodes.length; j++) {
-            if (!queue.contains(j)) {
-                queue.offer(j);
-                getResult(nodes, i + 1, queue);
-            }
-        }
-    }
-
-    //递归思路,求解最短路径问题
+    /**
+     *递归思路,求解最短路径问题
+     * d(i,V')定义为从顶点i出发经过V'中的各顶点（有且仅有一次），最后回到顶点0的最短路径长度；
+     * Cij 定义为顶点i到顶点j的距离
+     *
+     * 此处 nodes 对应
+     *
+     * @param matrix
+     * @param labelOfNode：出发点的label
+     * @param nodes：节点的个数
+     * @return
+     */
     public static int tSP(int[][] matrix, int labelOfNode, int nodes) {
         if (matrix.length <= 1) {
             return 0;
-        }
-        if (matrix.length == 2) {
-            return 2 * matrix[0][1];
         }
         if (nodes == 0) {
             return matrix[labelOfNode][0];
@@ -115,8 +119,8 @@ public class Code_05_Prim {
         for (int i = 0; i < len; i++) {
             int tmp = nodes;
             if ((1 & (nodes >> i)) == 1) {
-                min = Math.min(min, tSP(matrix, len - i, tmp & ((1 << len) - 1 - (1 << i)))
-                        + matrix[labelOfNode][len - i]);
+                min = Math.min(min, tSP(matrix, len - i-1, tmp & ((1 << len) - 1 - (1 << i)))
+                        + matrix[labelOfNode][len - i-1]);
             }
         }
         return min;
@@ -125,6 +129,10 @@ public class Code_05_Prim {
 
     public static void main(String[] args) {
         int[][] matrix = new int[][]{{0, 1, 2}, {1, 0, 1}, {2, 1, 0}};
+        //如果节点的个数为3，111 则表示集合中的元素为{1,2,3}
         System.out.println(tSP(matrix, 0, 3));
+//        Queue<Integer> queue = new LinkedList<>();
+//        getResult(3,0,queue);
+//        res.forEach(a-> System.out.println(a.toString()));
     }
 }

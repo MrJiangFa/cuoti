@@ -14,6 +14,7 @@ public class Worker2 extends Thread{
     public void run() {
         try {
             semaphore.acquire();
+            semaphore.tryAcquire(2);
             System.out.println("工人"+this.id+"占用一台机器");
             Thread.sleep(2000);
             System.out.println("工人"+this.id+"释放出机器");

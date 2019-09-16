@@ -1,7 +1,6 @@
 package recursive.backtrack;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,6 +17,7 @@ public class Code_04_Print_All_Permutations {
     public static void process1(char[] chs, int i) {
         if (i == chs.length) {
             System.out.println(String.valueOf(chs));
+            return;
         }
         for (int j = i; j < chs.length; j++) {
             swap(chs, i, j);
@@ -49,7 +49,7 @@ public class Code_04_Print_All_Permutations {
 
     public static void process2(List<List<Integer>> list, List<Integer> tmpList, int[] nums) {
         if (tmpList.size() == nums.length) {
-            list.add(tmpList);
+            list.add(new ArrayList<>(tmpList));
             return;
         }
         for (int j = 0; j < nums.length; j++) {
@@ -63,20 +63,20 @@ public class Code_04_Print_All_Permutations {
 
     /**
      * 采用迭代法或递推法，首先向结果的list中加入一个list，然后取出该list，
-     * 向list中的0-linked_list.size()位置插入数组中的某一个元素
+     * 对于数组中的每一个数，向list中的0-linked_list.size()位置插入数组中的某一个元素
      *
      * @param nums
      * @return
      */
     public static List<List<Integer>> permutations3(int[] nums) {
         LinkedList<List<Integer>> res = new LinkedList<List<Integer>>();
-        res.add(new ArrayList<Integer>());
+        res.add(new ArrayList<>());
         for (int n : nums) {
             int size = res.size();
             for (; size > 0; size--) {
                 List<Integer> r = res.pollFirst();
                 for (int i = 0; i <= r.size(); i++) {
-                    List<Integer> t = new ArrayList<Integer>(r);
+                    List<Integer> t = new ArrayList<>(r);
                     t.add(i, n);
                     res.add(t);
                 }
@@ -86,8 +86,10 @@ public class Code_04_Print_All_Permutations {
     }
 
     public static void main(String[] args) {
-//        permutations2(new int[]{1, 2, 3});
+//        List<List<Integer>> list = permutations3(new int[]{1, 2, 3});
+//        list.forEach((a) -> System.out.println(a.toString()));
 //        permutations3(new int[]{1, 2, 3});
+        permutations1("abc");
     }
 
 }

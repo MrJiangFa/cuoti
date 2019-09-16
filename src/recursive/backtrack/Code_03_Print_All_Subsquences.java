@@ -21,13 +21,8 @@ public class Code_03_Print_All_Subsquences {
 //        for(List<Integer> l : list){
 //            System.out.println(Arrays.toString(l.toArray()));
 //        }
-        int i = 0;
-        for(;i<10;i++){
-            if(i==9){
-                break;
-            }
-        }
-        System.out.println(i);
+        List<List<Integer>> list = subsets3(new int[]{1,2,3});
+        list.forEach(a-> System.out.println(a.toString()));
     }
 
     /**
@@ -94,7 +89,7 @@ public class Code_03_Print_All_Subsquences {
      * @param nums
      * @return
      */
-    public List<List<Integer>> subsets3(int[] nums) {
+    public static List<List<Integer>> subsets3(int[] nums) {
         int len = nums.length, p = 1 << len;
         List<List<Integer>> list = new ArrayList<>(p);
         for (int i = 0; i < p; i++) {
