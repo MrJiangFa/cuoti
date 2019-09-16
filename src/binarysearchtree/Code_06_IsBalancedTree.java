@@ -1,53 +1,52 @@
 package binarysearchtree;
 
+/**
+ * leetcode110
+ * 判断一棵树是否为平衡二叉树？
+ * 一个平衡二叉树的特点在于：任意节点的左右子树高度差不超过1
+ * <p>
+ * 解题思路：从上至下，通过遍历每一个节点的高度差是否超过1来改变一个全局变量的boolean变量来表示是否为平衡二叉树；
+ */
 public class Code_06_IsBalancedTree {
 
-	public static class Node {
-		public int value;
-		public Node left;
-		public Node right;
+    public static class Node {
+        public int value;
+        public Node left;
+        public Node right;
 
-		public Node(int data) {
-			this.value = data;
-		}
-	}
+        public Node(int data) {
+            this.value = data;
+        }
+    }
 
-	public static boolean isBalance(Node head) {
-		boolean[] res = new boolean[1];
-		res[0] = true;
-		getHeight(head, 1, res);
-		return res[0];
-	}
 
-	public static int getHeight(Node head, int level, boolean[] res) {
-		if (head == null) {
-			return level;
-		}
-		int lH = getHeight(head.left, level + 1, res);
-		if (!res[0]) {
-			return level;
-		}
-		int rH = getHeight(head.right, level + 1, res);
-		if (!res[0]) {
-			return level;
-		}
-		if (Math.abs(lH - rH) > 1) {
-			res[0] = false;
-		}
-		return Math.max(lH, rH);
-	}
+    private static boolean res = true;
 
-	public static void main(String[] args) {
-		Node head = new Node(1);
-		head.left = new Node(2);
-		head.right = new Node(3);
-		head.left.left = new Node(4);
-		head.left.right = new Node(5);
-		head.right.left = new Node(6);
-		head.right.right = new Node(7);
+    //暴力法：从上至下
+    public static boolean isBalance(Node head) {
+        maxDepth(head);
+        return res;
+    }
 
-		System.out.println(isBalance(head));
+    private static int maxDepth(Node head) {
+        if (head == null) {
+            return 0;
+        }
+        int l = maxDepth(head.left);
+        int r = maxDepth(head.right);
+        if (Math.abs(l - r) > 1)
+            res = false;
+        return Math.max(l, r) + 1;
+    }
 
-	}
+    /**
+     * 从下至上，非暴力法，提前阻断
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+
+
+    }
 
 }

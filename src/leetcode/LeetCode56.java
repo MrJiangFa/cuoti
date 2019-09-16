@@ -4,6 +4,7 @@ import java.util.*;
 
 public class LeetCode56 {
     public static void main(String[] args) {
+
         int[][] p = new int[][]{{1, 4}, {4, 5}};
         int[][] res = merge(p);
         for (int i = 0; i < res.length; i++) {

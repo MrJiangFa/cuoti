@@ -1,7 +1,13 @@
 package recursive.backtrack;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
+/**
+ * 排列组合问题
+ */
 public class Code_04_Print_All_Permutations {
 
     public static void permutations1(String str) {
@@ -80,7 +86,8 @@ public class Code_04_Print_All_Permutations {
     }
 
     public static void main(String[] args) {
-        permutations3(new int[]{1, 2, 3});
+//        permutations2(new int[]{1, 2, 3});
+//        permutations3(new int[]{1, 2, 3});
     }
 
 }

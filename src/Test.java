@@ -1,5 +1,7 @@
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Test {
 //    public static void main(String[] args) {
@@ -55,79 +57,41 @@ public class Test {
 //    }
 
     public static void main(String[] args) {
-        List<List<Integer>> list = new ArrayList<>();
-        list.add(Arrays.asList(1,3,12));
-        list.add(Arrays.asList(2,0,2));
-        list.add(Arrays.asList(1,1,4));
-        list.add(Arrays.asList(1,3,2));
-        list.add(Arrays.asList(2,0,4));
-        list.add(Arrays.asList(2,2,4));
-        List<Integer> res = get(list);
-        res.forEach(System.out::println);
-    }
-
-    public static List<Integer> get(List<List<Integer>> queries) {
-        Map<Integer,Integer> map =new HashMap<>();
-        List<Integer> l = new ArrayList<>();
-        for(List<Integer> list : queries){
-            if(list.get(0)==1){
-                if(!map.containsKey(list.get(0))){
-                    map.put(list.get(1),list.get(2));
-                }else{
-                    map.put(list.get(1),map.get(list.get(1))+list.get(2));
-                }
-            }else {
-                int count = 0;
-                for(int i = list.get(1);i<=list.get(2);i++){
-                    if(map.containsKey(i)){
-                        count+=map.get(i);
-                    }
-                }
-                l.add(count);
-            }
-        }
-        return l;
-    }
-
-    public static void getResult() {
         Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-        List<String> res = process(input, input.length() - 1);
-        String[] resArr = (String[]) res.toArray();
-        Arrays.sort(resArr);
-        for (int i = 0; i < resArr.length; i++) {
-            System.out.println(resArr[i]);
+        int n = sc.nextInt();
+        Map<Integer, Node> map = new HashMap<>();
+        while (sc.hasNextLine()) {
+            int from = sc.nextInt();
+            int to = sc.nextInt();
+            int weight = sc.nextInt();
+            if (!map.containsKey(from)) {
+                Node node = new Node(from);
+                node.map = new HashMap<>();
+                node.map.put(to, weight);
+                map.put(from, node);
+            } else {
+                Node node = map.get(from);
+                node.map.put(to, weight);
+            }
+        }
+        int[] arr = new int[n + 1];
+        for (int i = 1; i <= n; i++) {
+            if (!map.containsKey(i)) {
+                arr[i] = 0;
+            } else {
+
+            }
         }
     }
 
-    public static List<String> process(String s, int i) {
-        List<String> list = new ArrayList<>();
-        if (i == 0) {
-            list.add((char) (Integer.valueOf(s.charAt(i) + "") - 1 + 'A') + "");
-            return list;
+    static class Node {
+        public int val;
+        public Map<Integer, Integer> map;
+
+        public Node(int val) {
+            this.val = val;
+            map = new HashMap<>();
         }
-        if (i == 1) {
-            list.add((char) (Integer.valueOf(s.charAt(i - 1) + "") - 1 + 'A') + "" + (char) (Integer.valueOf(s.charAt(i) + "") - 1 + 'A'));
-            if (Integer.valueOf(s.substring(0, i + 1)) <= 26) {
-                list.add((char) (Integer.valueOf(s.substring(0, i + 1)) - 1 + 'A') + "");
-            }
-            return list;
-        }
-        List<String> before = process(s, i - 1);
-        int sizeOfBefore = before.size();
-        for (int count = 0; count < sizeOfBefore; count++) {
-            String tmp = before.remove(0);
-            list.add(tmp + (char) (Integer.valueOf(s.charAt(i) + "") - 1 + 'A'));
-        }
-        List<String> bbefore = process(s, i - 2);
-        int sizeOfBB = bbefore.size();
-        for (int count = 0; count < sizeOfBB; count++) {
-            String tmp = bbefore.remove(0);
-            if (Integer.valueOf(s.substring(i - 1, i + 1)) <= 26) {
-                list.add(tmp + (char) (Integer.valueOf(s.substring(i - 1, i + 1)) - 1 + 'A'));
-            }
-        }
-        return list;
     }
 
 

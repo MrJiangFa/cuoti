@@ -10,23 +10,72 @@ import java.util.Map.Entry;
  * https://www.jianshu.com/p/ff6db00ad866
  * 如果计算节点A到其他节点的最短路径
  * 1. 引入两个集合(S,U)
- * 2. S集合包含已经求出最短路径的点（及最短路径长度，初始时A->A=0），U集合包含未求出最短路径的点
+ * 2. S集合包-含已经求出最短路径的点（及最短路径长度，初始时A>A=0），U集合包含未求出最短路径的点
  * 3. 对U集合中
  */
 public class Code_06_Dijkstra {
     public static void main(String[] args) {
-        int max = Integer.MAX_VALUE;
-        Integer[][] matrix = new Integer[][]{{0, 4, max, 2, max}, {4, 0, 4, 1, max}, {max, 4, 0, 1, 3}, {2, 1, 1, 0, 7}, {max, max, 3, 7, 0}};
-        Graph graph = GraphGenerator.createGraph2(matrix);
-        HashMap<Node,Double> map = dijkstraByJF(0,graph);
-        for(Entry<Node,Double> entry : map.entrySet()){
-            System.out.println("0->"+entry.getKey().value+"的最短路径长度为："+entry.getValue());
-        }
+        int[][] arr = new int[7][7];
+        arr[0][2] = 1;
+        arr[1][5] = 1;
+        arr[2][3] = 1;
+        arr[3][2] = 1;
+        arr[4][3] = 1;
+        arr[5][4] = 1;
+        arr[6][5] = 1;
+        System.out.println(get(7, 1, 1, 1, arr, 2));
     }
+
+    private static int get(int N, int A, int B, int C, int[][] arr, int i) {
+        if (i == 0) {
+            return 0;
+        }
+        if (i == N - 1) {
+            int res = Integer.MAX_VALUE;
+            for (int row = 0; row < N - 1; row++) {
+                if (arr[row][N - 1] == 1) {
+                    int before = get(N, A, B, C, arr, row);
+                    res = Math.min(res, before + A);
+                }
+                if (arr[row][N - 2] == 1) {
+                    int before = get(N, A, B, C, arr, row);
+                    res = Math.min(res, before + C);
+                }
+            }
+            return res;
+        }
+        int res = Integer.MAX_VALUE;
+        for (int row = 0; row < N; row++) {
+            if (arr[row][i - 1] == 1) {
+                int before = get(N, A, B, C, arr, row);
+                res = Math.min(res, before + C);
+            }
+            if (arr[row][i] == 1) {
+                int before = get(N, A, B, C, arr, row);
+                res = Math.min(res, before + A);
+            }
+            if (arr[row][i + 1] == 1) {
+                int before = get(N, A, B, C, arr, row);
+                res = Math.min(res, before + B);
+            }
+        }
+        return res;
+    }
+
+//    public static void main(String[] args) {
+//        int max = Integer.MAX_VALUE;
+//        Integer[][] matrix = new Integer[][]{{0, 4, max, 2, max}, {4, 0, 4, 1, max}, {max, 4, 0, 1, 3}, {2, 1, 1, 0, 7}, {max, max, 3, 7, 0}};
+//        Graph graph = GraphGenerator.createGraph2(matrix);
+//        HashMap<Node, Double> map = dijkstraByJF(0, graph);
+//        for (Entry<Node, Double> entry : map.entrySet()) {
+//            System.out.println("0->" + entry.getKey().value + "的最短路径长度为：" + entry.getValue());
+//        }
+//    }
 
     /**
      * 此方法经过验证为正确方法
      * 时间复杂度为O(VE)
+     *
      * @param source:表示源节点的数字
      * @param graph:图
      * @return

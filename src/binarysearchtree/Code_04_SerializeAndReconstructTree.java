@@ -27,7 +27,7 @@ public class Code_04_SerializeAndReconstructTree {
 
 	public static Node reconByPreString(String preStr) {
 		String[] values = preStr.split("!");
-		Queue<String> queue = new LinkedList<String>();
+		Queue<String> queue = new LinkedList<>();
 		for (int i = 0; i != values.length; i++) {
 			queue.offer(values[i]);
 		}
@@ -36,7 +36,7 @@ public class Code_04_SerializeAndReconstructTree {
 
 	public static Node reconPreOrder(Queue<String> queue) {
 		String value = queue.poll();
-		if (value.equals("#")) {
+		if ("#".equals(value)) {
 			return null;
 		}
 		Node head = new Node(Integer.valueOf(value));
@@ -50,7 +50,7 @@ public class Code_04_SerializeAndReconstructTree {
 			return "#!";
 		}
 		String res = head.value + "!";
-		Queue<Node> queue = new LinkedList<Node>();
+		Queue<Node> queue = new LinkedList<>();
 		queue.offer(head);
 		while (!queue.isEmpty()) {
 			head = queue.poll();
@@ -70,11 +70,17 @@ public class Code_04_SerializeAndReconstructTree {
 		return res;
 	}
 
+	/**
+	 * 重新以队列的形式进行一遍层序遍历
+	 *
+	 * @param levelStr
+	 * @return
+	 */
 	public static Node reconByLevelString(String levelStr) {
 		String[] values = levelStr.split("!");
 		int index = 0;
 		Node head = generateNodeByString(values[index++]);
-		Queue<Node> queue = new LinkedList<Node>();
+		Queue<Node> queue = new LinkedList<>();
 		if (head != null) {
 			queue.offer(head);
 		}

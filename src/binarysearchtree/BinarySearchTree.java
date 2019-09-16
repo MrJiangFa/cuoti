@@ -1,9 +1,5 @@
 package binarysearchtree;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
-
 /**
  * 递归和非递归方法的二叉树遍历都使用了O(h)的空间复杂度，h表示二叉树的高度；
  *
@@ -56,6 +52,12 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
         return findMax(root);
     }
 
+    /**
+     * 寻找BST中最小值对应的节点
+     *
+     * @param t
+     * @return
+     */
     private Node<AnyType> findMin(Node<AnyType> t) {
         if (t == null) {
             return null;
@@ -65,13 +67,19 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
         return findMin(t.left);
     }
 
+    /**
+     * 寻找 BST 中最大值对应的节点
+     *
+     * @param t
+     * @return
+     */
     private Node<AnyType> findMax(Node<AnyType> t) {
         if (t == null) {
             return null;
         } else if (t.right == null) {
             return t;
         }
-        return findMax(t.left);
+        return findMax(t.right);
     }
 
     public void insert(AnyType x) {
@@ -117,94 +125,6 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
         return t;
     }
 
-    private void preOrder(Node<AnyType> head) {
-        if (head != null) {
-            System.out.print(head.element + " ");
-            preOrder(head.left);
-            preOrder(head.right);
-        }
-    }
-
-    private void midOrder(Node<AnyType> head) {
-        if (head != null) {
-            midOrder(head.left);
-            System.out.print(head.element + " ");
-            midOrder(head.right);
-        }
-    }
-
-    private void printTreeByPostOrder(Node<AnyType> t) {
-        if (t != null) {
-            printTreeByPostOrder(t.left);
-            printTreeByPostOrder(t.right);
-            System.out.print(t.element + " ");
-        }
-    }
-
-    //先序遍历非递归实现
-    private void preOrderRecur(Node<AnyType> head) {
-        System.out.print("pre-order: ");
-        if (head != null) {
-            Stack<Node> stack = new Stack<>();
-            stack.push(head);
-            while (!stack.isEmpty()) {
-                head = stack.pop();
-                System.out.print(head.element + " ");
-                if (head.right != null) {
-                    stack.push(head.right);
-                }
-                if (head.left != null) {
-                    stack.push(head.left);
-                }
-            }
-            System.out.println();
-        }
-    }
-
-    //中序遍历非递归打印
-    //当前节点为空，从栈中拿一个打印，当前节点向右
-    //当前节点不为空，当前节点压入栈，当前节点往左
-    private void midOrderRecur(Node<AnyType> head) {
-        System.out.print("mid-order: ");
-        if (head != null) {
-            LinkedList<Node<AnyType>> stack = new LinkedList<>();
-            while (head != null || !stack.isEmpty()) {
-                if (head != null) {//向将左边界全部压入栈中
-                    stack.push(head);
-                    head = head.left;
-                } else {
-                    head = stack.pop();
-                    System.out.print(head.element + " ");
-                    head = head.right;
-                }
-            }
-        }
-    }
-
-    //后序遍历
-    private void postOrderRecur(Node<AnyType> head) {
-        System.out.print("post-order: ");
-        if (head != null) {
-            Stack<Node<AnyType>> s1 = new Stack<>();
-            Stack<Node<AnyType>> s2 = new Stack<>();
-            s1.push(head);
-            while (!s1.isEmpty()) {
-                head = s1.pop();
-                s2.push(head);
-                if (head.left != null) {
-                    s1.push(head.left);
-                }
-                if (head.right != null) {
-                    s1.push(head.right);
-                }
-            }
-            while (!s2.isEmpty()) {
-                System.out.println(s2.pop().element + " ");
-            }
-        }
-        System.out.println();
-    }
-
     private int depth(Node<AnyType> t) {
         if (t == null) {
             return 0;
@@ -215,28 +135,6 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
             return l + 1;
         } else {
             return r + 1;
-        }
-    }
-
-    //递归实现
-    private void printTreeByLevelOrder(Node<AnyType> t) {
-
-    }
-
-    //非递归实现
-    private void printTreeByLevelOrder1(Node<AnyType> t) {
-        Queue<Node<AnyType>> queue = new LinkedList<>();
-        queue.offer(t);
-        Node<AnyType> currentNode;
-        while (!queue.isEmpty()) {
-            currentNode = queue.poll();
-            System.out.print(currentNode.element + " ");
-            if (currentNode.left != null) {
-                queue.offer(currentNode.left);
-            }
-            if (currentNode.right != null) {
-                queue.offer(currentNode.right);
-            }
         }
     }
 

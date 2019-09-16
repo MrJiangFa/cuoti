@@ -29,4 +29,25 @@ public class MaxLenOfNonrepSubstring {
         }
         return ans;
     }
+
+    /**
+     * 基本思路：
+     * @param s
+     * @return
+     */
+    public static int lengthOfLongestSubstring2(String s) {
+        int res = 0;
+        int index = -1;
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = index + 1; j < i; j++) {
+                if(s.charAt(j)==s.charAt(i)){
+                    index = j;
+                    break;
+                }
+            }
+            res = Math.max(i-index,res);
+        }
+        return res;
+    }
+
 }

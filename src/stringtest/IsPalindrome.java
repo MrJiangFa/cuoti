@@ -1,11 +1,41 @@
 package stringtest;
 
 /**
- * 求一个字符串中的最长回文子串
+ * leetcode5:求一个字符串中的最长回文子串
  */
 public class IsPalindrome {
     public static void main(String[] args) {
         System.out.println(longestPalindrome("cabbad"));
+    }
+
+    private String res = "";
+    public String longestPalindrome2(String s) {
+        if(s==null||s.length()==0)
+            return res;
+        for(int i = 0;i<s.length();i++){
+            for(int j = i;j<s.length();j++){
+                process(s,i,j);
+            }
+        }
+        return res;
+    }
+    private boolean process(String s,int i,int j){
+        if(j-i<3){
+            if(s.charAt(i)==s.charAt(j)){
+                if(j-i+1>res.length()){
+                    res = s.substring(i,j+1);
+                }
+                return true;
+            }
+            return false;
+        }
+        if(process(s,i+1,j-1)&&s.charAt(i)==s.charAt(j)){
+            if(j-i+1>res.length()){
+                res = s.substring(i,j+1);
+            }
+            return true;
+        }
+        return false;
     }
 
     //采用递归做超出时间限制

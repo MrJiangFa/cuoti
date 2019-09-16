@@ -34,18 +34,14 @@ public class Code_05_Prim {
         for (Node node : graph.nodes.values()) {
             if (!set.contains(node)) {
                 set.add(node);
-                for (Edge edge : node.edges) {
-                    priorityQueue.add(edge);
-                }
+                priorityQueue.addAll(node.edges);
                 while (!priorityQueue.isEmpty()) {
                     Edge edge = priorityQueue.poll();
                     Node toNode = edge.to;
                     if (!set.contains(toNode)) {
                         set.add(toNode);
                         result.add(edge);
-                        for (Edge nextEdge : toNode.edges) {
-                            priorityQueue.add(nextEdge);
-                        }
+                        priorityQueue.addAll(toNode.edges);
                     }
                 }
             }
@@ -83,7 +79,10 @@ public class Code_05_Prim {
         }
     }
 
-    //排列组合求解TSP问题，暴力法，没有什么物理意义，难以表示成dp形式
+    /**
+     * 排列组合求解TSP（Traveling Salesman Problem,旅行商问题)问题，暴力法，没有什么物理意义，难以表示成dp形式
+     * 旅行商问题：从一点出发，经过几座城市，又回到出发点，求怎么走路径最短
+     */
     static Queue<Queue<Integer>> res = new LinkedList<>();
 
     public static void getResult(int[] nodes, int i, Queue<Integer> queue) {

@@ -46,7 +46,7 @@ public class SuccessorNode {
     //遍历后继节点
     public static Node getSuccessorNode(Node node) {
         //对于存在右子树的节点，其后继节点为其右子树的最左节点
-        //如果没有右子树，左子树的最后一个节点；向上走，知道找到一个
+        //如果没有右子树，左子树的最后一个节点；向上走，直到找到一个
         if (node == null) {
             return node;
         }

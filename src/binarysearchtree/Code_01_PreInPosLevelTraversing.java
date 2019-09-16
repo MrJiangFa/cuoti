@@ -127,19 +127,17 @@ public class Code_01_PreInPosLevelTraversing {
             return;
         }
         Queue<Node> queue = new LinkedList<>();
-        Set<Node> set = new HashSet<>();
+        //Set<Node> set = new HashSet<>();
         queue.add(head);
-        set.add(head);
+        //set.add(head);
         while (!queue.isEmpty()) {
             Node node = queue.poll();
             System.out.print(node.value + " ");
-            if (node.left != null && !set.contains(node.left)) {
+            if (node.left != null) {
                 queue.add(node.left);
-                set.add(node.left);
             }
-            if (node.right != null && !set.contains(node.right)) {
+            if (node.right != null) {
                 queue.add(node.right);
-                set.add(node.right);
             }
         }
         System.out.println();

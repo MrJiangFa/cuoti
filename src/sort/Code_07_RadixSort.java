@@ -3,7 +3,9 @@ package sort;
 import java.util.Arrays;
 
 /**
- * 基数排序：
+ * 基数排序：寻找数组中的最大值，计算其位数——maxbit()
+ *           从个位开始，对数组中数据进行排序，然后在上一次排序基础上再对高位进行排序
+ *           0-9 10个桶，从各位开始
  */
 public class Code_07_RadixSort {
 
