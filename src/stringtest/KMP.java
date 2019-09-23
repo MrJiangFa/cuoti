@@ -2,7 +2,8 @@ package stringtest;
 
 public class KMP {
     public static void main(String[] args) {
-
+        String s = "";
+        System.out.println(s.equalsIgnoreCase(""));
     }
 
     public static int getIndexOf(String s, String m) {
@@ -56,3 +57,5 @@ public class KMP {
         return next;
     }
 }
+
+

@@ -32,6 +32,4 @@ public class Island {
     }
 
     //矩阵量太大，改成并行计算
-
-
 }
