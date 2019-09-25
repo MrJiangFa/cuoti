@@ -1,10 +1,13 @@
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Scanner;
 
 public class Test {
     public static void main(String[] args) {
-        String a = "21";
-        String b = a+"1";
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += sc.nextLong() / n;
+        }
+        System.out.println(sum);
     }
 }
