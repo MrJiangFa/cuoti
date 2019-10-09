@@ -1,12 +1,15 @@
 package design_parttern;
 
+import java.util.Enumeration;
+import java.util.Iterator;
+
 /**
  * 通过适配器，将客户和被适配者解耦；
- *
+ * <p>
  * 将一个类的接口转化成客户期望的另一个接口；headfirst P243
- *
+ * <p>
  * 类适配器——在支持多继承的语言中可以使用类适配器，适配器类既继承了被适配者也继承了目标接口；
- *
+ * <p>
  * 当一个适配器包装多个适配者时——外观模式/装饰者模式，可以以此来实现代替实现多态的功能；
  *
  * <p>
@@ -108,6 +111,28 @@ class Power10VAdapter extends AbstractAdapter {
     }
 }
 
-public class AdapterPattern {
+/**
+ * 实现source类为Enumeration接口，target接口为Iterator接口的Adapter
+ */
+class EnumerationIterator implements Iterator {
+    private Enumeration enumeration;
 
+    public EnumerationIterator(Enumeration enumeration) {
+        this.enumeration = enumeration;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return enumeration.hasMoreElements();
+    }
+
+    @Override
+    public Object next() {
+        return enumeration.nextElement();
+    }
+
+    @Override
+    public void remove() {
+        throw new UnsupportedOperationException();
+    }
 }

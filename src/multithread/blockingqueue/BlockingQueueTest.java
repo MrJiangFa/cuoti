@@ -11,7 +11,7 @@ public class BlockingQueueTest {
         Consumer c1 = new Consumer(queue);
         new Thread(p).start();
         new Thread(c).start();
-        new Thread(c).start();
+        new Thread(c1).start();
     }
 
     static class Producer implements Runnable {

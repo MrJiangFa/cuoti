@@ -1,5 +1,7 @@
 package unionfind;
 
+import trie_tree.LeetCode14;
+
 public class Island {
     //单CPU解决问题
     public static int countIsland(int[][] m) {

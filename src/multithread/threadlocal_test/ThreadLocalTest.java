@@ -8,12 +8,7 @@ public class ThreadLocalTest {
     private static final int IPAD = 2;
     private static final List<Integer> list = new ArrayList<>();
     private static final AtomicInteger nextId = new AtomicInteger(0);
-    private static final ThreadLocal<Integer> threadId = new ThreadLocal<Integer>() {
-        @Override
-        protected Integer initialValue() {
-            return nextId.getAndIncrement();
-        }
-    };
+    private static final ThreadLocal<Integer> threadId = ThreadLocal.withInitial(() -> nextId.getAndIncrement());
 
 
     private static int getId() {
@@ -60,6 +55,5 @@ public class ThreadLocalTest {
     }
 
     public static void main(String[] args) {
-        testThreadLocal();
     }
 }
